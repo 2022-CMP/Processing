@@ -21,7 +21,7 @@ void draw() {
 }
 
 void keyPressed() {
-  if (!tower.isEmpty()) {
+  if (!tower.Tower.isEmpty()) {
     tower.popBlock();
   }
 }
