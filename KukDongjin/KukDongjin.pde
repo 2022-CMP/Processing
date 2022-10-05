@@ -16,9 +16,12 @@ void setup() {
 }
 
 void draw() {
+  background(0xff, 0xff, 0xff);
   tower.drawTower();
 }
 
 void keyPressed() {
-  tower.popBlock();
+  if (!tower.isEmpty()) {
+    tower.popBlock();
+  }
 }
