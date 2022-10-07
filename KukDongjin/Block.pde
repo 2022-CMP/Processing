@@ -15,6 +15,7 @@ class Block {
     size = width / 384;
     blockColor = _color;
     blockWidth = size * 40; blockHeight = size * 10;
+    isTextureMode = false;
   }
 
   // Using TEXTURE(PImage)
@@ -23,6 +24,7 @@ class Block {
     size = width / 384;
     img = _img;
     blockWidth = size * 40; blockHeight = size * 10;
+    isTextureMode = true;
   }
 
   void createBlock() {
@@ -35,7 +37,18 @@ class Block {
   }
 
   void drawTextureBlock() {
-
+    noStroke();
+    
+    textureMode(NORMAL);
+    beginShape();
+    texture(img);
+    vertex(x + size * 80,              y + size * 60,                0, 0);
+    vertex(x + size * 80 + blockWidth, y + size * 60,                1, 0);
+    vertex(x + size * 80 + blockWidth, y + size * 60 + blockHeight,  1, 1);
+    vertex(x + size * 80,              y + size * 60 + blockHeight,  0, 1);
+    endShape();
+    
+    return;
   }
 
   void drawColorBlock() {
@@ -44,10 +57,10 @@ class Block {
 
     // DEFAULT BLOCK LOCATION
     beginShape();
-    vertex(x + size * 80,              y + size * 60);
-    vertex(x + size * 80 + blockWidth, y + size * 60);
-    vertex(x + size * 80 + blockWidth, y + size * 60 + blockHeight);
-    vertex(x + size * 80,              y + size * 60 + blockHeight);
+    vertex(x + size * 80,              y + size * 60,                0, 0);
+    vertex(x + size * 80 + blockWidth, y + size * 60,                0, 0);
+    vertex(x + size * 80 + blockWidth, y + size * 60 + blockHeight,  0, 0);
+    vertex(x + size * 80,              y + size * 60 + blockHeight,  0, 0);
     endShape(CLOSE);
     
     return;

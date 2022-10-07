@@ -1,10 +1,12 @@
 import java.util.*;
 
+
+boolean isTextureMode = false;
 Tower tower = new Tower();
 Timer timer = new Timer();
 
 void setup() {
-  size(displayWidth, displayHeight);
+  size(displayWidth, displayHeight, P3D);
 }
 
 void draw() {
@@ -18,4 +20,8 @@ void keyPressed() {
   if (!tower.Tower.isEmpty()) {
     tower.popBlock();
   }
+}
+
+void mousePressed() {
+  isTextureMode = !isTextureMode;
 }
