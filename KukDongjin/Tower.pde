@@ -23,7 +23,6 @@ class Tower {
     }
     else {
       block.y = Tower.peek().y - Tower.peek().blockHeight;
-      println(block.y);
       Tower.push(block);
     }
 

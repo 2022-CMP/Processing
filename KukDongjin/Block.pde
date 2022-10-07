@@ -18,7 +18,7 @@ class Block {
   }
 
   // Using TEXTURE(PImage)
-  Block(float _x, float _y, color _color, PImage _img) {
+  Block(float _x, float _y, PImage _img) {
     x = _x; y = _y;
     size = width / 384;
     img = _img;
@@ -27,7 +27,7 @@ class Block {
 
   void createBlock() {
     if (isTextureMode) {
-      
+      drawTextureBlock();
     }
     else {
       drawColorBlock();
