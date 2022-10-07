@@ -6,16 +6,24 @@ class Particle {
   PVector acceleration;
   float lifespan;
 
+  float Bigsize = 3;
+
   Particle(PVector l) {
-    acceleration = new PVector(0, 0.05);
+    acceleration = new PVector(-1, -0.05);
     velocity = new PVector(random(-1, 1), random(-2, 0));
     position = l.copy();
     lifespan = 255.0;
   }
 
   void run() {
+    pushMatrix();
+
+    scale(Bigsize);  
     update();
     display();
+    Bigsize -= Bigsize/40;
+  
+    popMatrix();
   }
 
   // Method to update position
@@ -27,8 +35,8 @@ class Particle {
 
   // Method to display
   void display() {
-    stroke(255, lifespan);
-    fill(255, lifespan);
+    stroke(255, random(0,100), 0, lifespan);
+    fill(255, random(0,100), 0, lifespan);
     ellipse(position.x, position.y, 8, 8);
   }
 
