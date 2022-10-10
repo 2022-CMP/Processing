@@ -1,11 +1,12 @@
 class Timer {
   int seconds;
-  
+  int timeAdder;
   Block block;
   
   // DEFAULT Constructor
-  Timer() {
-    seconds = 1;
+  Timer(int second) {
+    seconds = second;
+    timeAdder = seconds;
   }
   
   void createNewBlock(Tower tower) {
@@ -16,7 +17,7 @@ class Timer {
       else {
         tower.pushBlock(new Block(width / 2, height / 2, randomColor()));
       }
-      seconds += 1;
+      seconds += timeAdder;
     }
   }
   

@@ -3,10 +3,13 @@ import java.util.*;
 
 boolean isTextureMode = false;
 Tower tower = new Tower();
-Timer timer = new Timer();
+Timer timer = new Timer(2);
+Character slave;
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
+  
+  slave = new Character();
 }
 
 void draw() {
@@ -14,6 +17,7 @@ void draw() {
   
   timer.createNewBlock(tower);
   tower.drawTower();
+  slave.drawChar();
 }
 
 void keyPressed() {

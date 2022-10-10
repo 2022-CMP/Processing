@@ -9,6 +9,12 @@ class Block {
   // Default Constructor
   Block() { }
 
+  // Constructor to get Block Location
+  Block(float _x, float _y) {
+    x = _x; y = _y;
+    size = width / 384;
+  }
+
   // Using COLOR
   Block(float _x, float _y, color _color) {
     x = _x; y = _y;
