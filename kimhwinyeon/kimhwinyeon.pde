@@ -2,12 +2,16 @@ import java.util.*;
 
 NewLightnings lightnings;
 FireParticleSystem fire;
-ExplosionCollection explosion;
+ExplosionParticleSystem explosion;
 
 void setup() {
-    size(1080, 720);
+    size(1080, 720, P3D);
+
     lightnings = new NewLightnings();
+    
     fire = new FireParticleSystem(0, new PVector(width/2, height/2));
+
+    explosion = new ExplosionParticleSystem(new PVector(mouseX, mouseY));
 
     // fire = new ParticleSystem(new PVector(width/2, height/2));
 }
@@ -17,6 +21,7 @@ void draw () {
     
     lightnings.Update();
     fire.run();
+    explosion.run();
 
     // fire.addParticle();
     // fire.run();
@@ -26,4 +31,7 @@ void draw () {
 void mousePressed () {
     lightnings.ResetLightnings();
     fire.startOfFireParticle();
+
+    explosion = new ExplosionParticleSystem(new PVector(mouseX, mouseY));
+    explosion.stratOfExplosion();
 }

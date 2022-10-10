@@ -7,7 +7,6 @@ class FireParticle {
     float lifespan;
 
     // for scale
-    float FireWidth = width/10;
     float FireHeight = height/10;
 
     PImage img;
@@ -27,13 +26,13 @@ class FireParticle {
     FireParticle(PVector loc, PImage img_) {
         acceleration = new PVector(0, 0);
 
-        float vx = randomGaussian()*0.3;
-        float vy = randomGaussian()*0.3 - 1.0;
+        float vx = randomGaussian() * width / 1080;
+        float vy = (randomGaussian() - 5.0) * width / 1080;
         velocity = new PVector(vx, vy);
         
         location = loc.copy();
         
-        lifespan = 100.0;
+        lifespan = 150.0;
         
         img = img_;
     }
@@ -61,16 +60,24 @@ class FireParticle {
 
     // Method to display
     void render() {
-        /* Image Version
-        imageMode(CENTER);
-        tint(255, lifespan);
-        image(img, location.x, location.y);
-        */
+        // Image Version
+        pushMatrix();
         
-        // Drawing a circle instead
+        translate(location.x, location.y);
+        scale(0.3);
+        imageMode(CENTER);
+        
+        // Make Black and tranparent
+        float toBlack = map(lifespan, 0, 150, 0, 255);
+        tint(toBlack, lifespan);
+        image(img, 0, 0);
+        
+        popMatrix();
+        
+        /*// Drawing a circle instead
         fill(255,0,0, lifespan);
         noStroke();
-        ellipse(location.x,location.y, FireWidth, FireHeight);
+        ellipse(location.x,location.y, FireHeight, FireHeight);*/
     }
 
     // Is the particle still useful?

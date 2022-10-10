@@ -4,7 +4,7 @@ class FireParticleSystem {
     PVector origin;                   // An origin point for where fireParticles are birthed
     PImage img;
 
-    int origianlDuringTime = 4;
+    int origianlDuringTime = 2;
     int elapsedTime = second();
     int endTime = 0;
 
@@ -12,6 +12,7 @@ class FireParticleSystem {
         // Initializing
         fireParticles = new ArrayList<FireParticle>();              
         origin = blockLocation.copy();                                   // Store the origin point
+        img = loadImage("flame.png");
         
         // making Particles
         for (int i = 0; i < num; i++) {
@@ -34,16 +35,17 @@ class FireParticleSystem {
     void run() {
         elapsedTime = second();
 
-        if (elapsedTime < endTime) {
-            for (int i = fireParticles.size()-1; i >= 0; i--) {
-                FireParticle p = fireParticles.get(i);
-                p.run();
+        
+        for (int i = fireParticles.size()-1; i >= 0; i--) {
+            FireParticle p = fireParticles.get(i);
+            p.run();
 
-                if (p.isDead()) {
-                    fireParticles.remove(i);
-                }
+            if (p.isDead()) {
+                fireParticles.remove(i);
             }
+        }
 
+        if (elapsedTime < endTime) {
             for (int i = 0 ; i < 2 ; i++)
                 addParticle();
         }
