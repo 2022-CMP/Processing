@@ -1,22 +1,18 @@
 import java.util.*;
 
+
+boolean isTextureMode = false;
 Tower tower = new Tower();
+Timer timer = new Timer();
 
 void setup() {
-  size(displayWidth, displayHeight);
-  Block block = new Block(width / 2, height / 2, color(0xff, 0xff, 0x00));
-  Block block2 = new Block(width / 2, height / 2, color(0x00, 0xff, 0x00));
-  Block block3 = new Block(width / 2, height / 2, color(0xff, 0xff, 0x00));
-  Block block4 = new Block(width / 2, height / 2, color(0x00, 0xff, 0x00));
-
-  tower.pushBlock(block);
-  tower.pushBlock(block2);
-  tower.pushBlock(block3);
-  tower.pushBlock(block4);
+  size(displayWidth, displayHeight, P3D);
 }
 
 void draw() {
   background(0xff, 0xff, 0xff);
+  
+  timer.createNewBlock(tower);
   tower.drawTower();
 }
 
@@ -24,4 +20,8 @@ void keyPressed() {
   if (!tower.Tower.isEmpty()) {
     tower.popBlock();
   }
+}
+
+void mousePressed() {
+  isTextureMode = !isTextureMode;
 }
