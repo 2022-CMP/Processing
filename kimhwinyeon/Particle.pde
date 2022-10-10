@@ -9,7 +9,7 @@ class Particle {
   float Bigsize = 3;
 
   Particle(PVector l) {
-    acceleration = new PVector(-1, -0.05);
+    acceleration = new PVector(-1, -0.005);
     velocity = new PVector(random(-1, 1), random(-2, 0));
     position = l.copy();
     lifespan = 255.0;
@@ -18,10 +18,10 @@ class Particle {
   void run() {
     pushMatrix();
 
-    scale(Bigsize);  
+    //scale(Bigsize);  
     update();
     display();
-    Bigsize -= Bigsize/40;
+    //Bigsize -= Bigsize/40;
   
     popMatrix();
   }

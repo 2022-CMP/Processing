@@ -21,6 +21,7 @@ public class kimhwinyeon extends PApplet {
 
 NewLightnings lightnings;
 ParticleSystem fire;
+ExplosionCollection explosion;
 
  public void setup() {
     /* size commented out by preprocessor */;
@@ -32,12 +33,157 @@ ParticleSystem fire;
     background(150);
     
     lightnings.Update();
-    ps.addParticle();
-    ps.run();
+    fire.addParticle();
+    fire.run();
+    // explosion.drawExplosion();
 }
 
  public void mousePressed () {
     lightnings.ResetLightnings();
+}
+class Shard {
+  float x, y;    // position
+  float dx, dy;  // velocity
+  float r;       // radius
+  float dr;      // rate of change of radius
+
+  boolean visible;
+
+  Shard() {
+     reset();
+  }
+
+   public void reset() {
+    dx = random(-2.0f, 2.0f);   // try changing these
+    dy = random(-2.0f, 2.0f);   // initial random
+    r = random(4.0f, 10.0f);    // values to get different
+    dr = random(-0.5f, 0.0f);   // kinds of explosions
+    visible = true;
+  }
+
+   public void render() {
+    if (visible) {
+      ellipse(x, y, 2 * r, 2 * r);
+    }
+  }
+
+   public void update() {
+    x += dx;
+    y += dy;
+    r += dr;
+
+    if (r < 1) {   // when the shard gets too small, make it disappear
+      visible = false;
+    }
+  }
+} // class Shard
+class ExplosionCollection {
+
+final int NUM_SHARDS = 100;  // number of particles in an explosion
+ArrayList<Shard> shards;  // initialized to null
+
+ExplosionCollection() {
+  // an explosion consists of many small shards
+  shards = new ArrayList<Shard>();
+  for(int i = 0; i < NUM_SHARDS; ++i) {
+    Shard s = new Shard();
+    shards.add(s);
+  }
+}
+
+ public void drawExplosion() {
+    smooth();
+  noStroke();
+  fill(255, 255, 0);   // yellow
+
+  for(Shard s : shards) {
+    s.render();
+    s.update();
+  }
+}
+}
+class FireParticle {
+    // For Move Particle
+    PVector location;
+    PVector velocity;
+    PVector acceleration;
+
+    float lifespan;
+
+    // for scale
+    float FireWidth = width/10;
+    float FireHeight = height/10;
+
+    PImage img;
+
+    Particle(PVector l) {
+        acceleration = new PVector(0, 0);
+
+        float vx = randomGaussian()*0.3f;
+        float vy = randomGaussian()*0.3f - 1.0f;
+        velocity = new PVector(vx, vy);
+        
+        location = l.copy();
+        
+        lifespan = 100.0f;
+    }
+
+    Particle(PVector l, PImage img_) {
+        acceleration = new PVector(0, 0);
+
+        float vx = randomGaussian()*0.3f;
+        float vy = randomGaussian()*0.3f - 1.0f;
+        velocity = new PVector(vx, vy);
+        
+        location = l.copy();
+        
+        lifespan = 100.0f;
+        
+        img = img_;
+    }
+
+     public void run() {
+        
+        update();
+        
+        render();
+    }
+
+    // scattering fireworks expression
+     public void applyForce(PVector f) {
+        acceleration.add(f);
+    }  
+
+    // Method to update position
+     public void update() {
+        velocity.add(acceleration);
+        location.add(velocity);
+        lifespan -= 2.5f;
+        acceleration.mult(0); // clear Acceleration
+    }
+
+    // Method to display
+     public void render() {
+        /* Image Version
+        imageMode(CENTER);
+        tint(255, lifespan);
+        image(img, location.x, location.y);
+        */
+        
+        // Drawing a circle instead
+        fill(255,0,0, lifespan);
+        noStroke();
+        ellipse(location.x,location.y, FireWidth, FireHeight);
+    }
+
+    // Is the particle still useful?
+     public boolean isDead() {
+        if (lifespan <= 0.0f) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 class Lightning {
   
@@ -126,7 +272,7 @@ class NewLightning {
     // Lightning...
     float angleOfLine, currentProgress = 0;
     float originalDistance, limitDistance;
-    float speed = width / 50;
+    float speed = width / 30;
 
     // Reculsion
     NewLightning s1, s2;
@@ -245,16 +391,24 @@ class Particle {
   PVector acceleration;
   float lifespan;
 
+  float Bigsize = 3;
+
   Particle(PVector l) {
-    acceleration = new PVector(0, 0.05f);
-    velocity = new PVector(random(-1, 1), random(1, 0));
+    acceleration = new PVector(-1, -0.005f);
+    velocity = new PVector(random(-1, 1), random(-2, 0));
     position = l.copy();
     lifespan = 255.0f;
   }
 
    public void run() {
+    pushMatrix();
+
+    //scale(Bigsize);  
     update();
     display();
+    //Bigsize -= Bigsize/40;
+  
+    popMatrix();
   }
 
   // Method to update position
@@ -266,8 +420,8 @@ class Particle {
 
   // Method to display
    public void display() {
-    stroke(255, random(0,20), 0, lifespan);
-    fill(255, random(0,20), 0, lifespan);
+    stroke(255, random(0,100), 0, lifespan);
+    fill(255, random(0,100), 0, lifespan);
     ellipse(position.x, position.y, 8, 8);
   }
 

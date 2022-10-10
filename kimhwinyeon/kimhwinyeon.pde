@@ -1,22 +1,29 @@
 import java.util.*;
 
 NewLightnings lightnings;
-ParticleSystem fire;
+FireParticleSystem fire;
+ExplosionCollection explosion;
 
 void setup() {
     size(1080, 720);
     lightnings = new NewLightnings();
-    fire = new ParticleSystem(new PVector(width/2, height/2));
+    fire = new FireParticleSystem(0, new PVector(width/2, height/2));
+
+    // fire = new ParticleSystem(new PVector(width/2, height/2));
 }
 
 void draw () {
     background(150);
     
     lightnings.Update();
-    fire.addParticle();
     fire.run();
+
+    // fire.addParticle();
+    // fire.run();
+    // explosion.drawExplosion();
 }
 
 void mousePressed () {
     lightnings.ResetLightnings();
+    fire.startOfFireParticle();
 }
