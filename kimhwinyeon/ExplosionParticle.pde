@@ -1,28 +1,30 @@
-// A simple Particle class
-
-class Particle {
+class ExplosionParticle {
   PVector position;
   PVector velocity;
   PVector acceleration;
   float lifespan;
 
+  PImage img;
   float Bigsize = 3;
 
-  Particle(PVector l) {
-    acceleration = new PVector(-1, -0.05);
-    velocity = new PVector(random(-1, 1), random(-2, 0));
+  ExplosionParticle(PVector l, PImage img_) {
+    acceleration = new PVector(random(-0.05, 0.05), random(-0.05, 0.05));
+    velocity = new PVector(random(-1, 1), random(-1, 1));
     position = l.copy();
     lifespan = 255.0;
+
+    img = img_;
   }
 
   void run() {
     pushMatrix();
-
-    scale(Bigsize);  
+    
+    translate(position.x, position.y);
+    scale(Bigsize / 10);  
     update();
     display();
-    Bigsize -= Bigsize/40;
-  
+    Bigsize -= Bigsize/50;
+
     popMatrix();
   }
 
@@ -35,9 +37,15 @@ class Particle {
 
   // Method to display
   void display() {
+   
+    tint(255, lifespan);
+    image(img, 0, 0);
+    
+    /* draw 
     stroke(255, random(0,100), 0, lifespan);
     fill(255, random(0,100), 0, lifespan);
     ellipse(position.x, position.y, 8, 8);
+    */
   }
 
   // Is the particle still useful?

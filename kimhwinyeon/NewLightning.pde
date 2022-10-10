@@ -4,7 +4,7 @@ class NewLightning {
     // Lightning...
     float angleOfLine, currentProgress = 0;
     float originalDistance, limitDistance;
-    float speed = width / 50;
+    float speed = width / 30;
 
     // Reculsion
     NewLightning s1, s2;
