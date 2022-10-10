@@ -3,7 +3,7 @@ Block block;
 void setup() {
   size(800, 600);
   block = new Block(400,300,5,color(100),10);
-  chopstick = loadImage("chopstick.png");//thanks fo flaticons.
+  chopstick = loadImage("chopstick.png");//thanks fo dlf.pt.
 }//젓가락 이미지 실사풍으로 바꾸고 _> 이미지 크기 변경에 따라서 위치 조정해 줄 것
 
 void draw() {
