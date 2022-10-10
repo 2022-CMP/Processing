@@ -3,8 +3,8 @@ Block block;
 void setup() {
   size(800, 600);
   block = new Block(400,300,5,color(100),10);
-  chopstick = loadImage("chopsticks.png");//thanks fo flaticons.
-}
+  chopstick = loadImage("chopstick.png");//thanks fo flaticons.
+}//젓가락 이미지 실사풍으로 바꾸고 _> 이미지 크기 변경에 따라서 위치 조정해 줄 것
 
 void draw() {
   background(200);
@@ -15,7 +15,7 @@ void draw() {
 }
 
 void mouseClicked() {
-  if (mouseButton == LEFT) {
+  if (mouseButton == LEFT) {//유아이 버튼에 따른 조건으로 변경 될 것(아마도)
     chopstickAct  = true;
   }
 }
