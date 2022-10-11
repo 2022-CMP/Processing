@@ -1,6 +1,4 @@
 import java.util.*;
-import java.math.*;
-
 
 boolean isTextureMode = false;
 Tower tower = new Tower();
@@ -10,7 +8,7 @@ Character slave;
 void setup() {
   size(displayWidth, displayHeight, P3D);
   
-  slave = new Character(3);
+  slave = new Character(2);
 }
 
 void draw() {
