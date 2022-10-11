@@ -1,12 +1,18 @@
 class Character {
   ArrayList<PImage> slave = new ArrayList<>();
   ArrayList<PImage> slaveInvert = new ArrayList<>();
+  PImage currentSprite;
+
   Block blockLoc = new Block(width / 2, height / 2);
   float startX = blockLoc.x + blockLoc.size * 60;
   float startY = blockLoc.y + blockLoc.size * 43;
   float x, y;
+
+  float seconds = 0.1f;
+  float timeAdder = seconds;
   
   boolean isLeft = true;
+  int i = 0;
   
   Character() {
     slave.add(loadImage("char1.png"));
@@ -25,11 +31,13 @@ class Character {
   }
 
   void drawChar() {
+    changeChar();
+
     if (isLeft) {
-      image(slave.get(1), x, y);
+      image(currentSprite, x, y);
     }
     else {
-      image(slaveInvert.get(1), x, y);
+      image(currentSprite, x, y);
     }
 
     moveChar();
@@ -37,10 +45,10 @@ class Character {
 
   void moveChar() {
     if (isLeft) {
-      x -= blockLoc.size * 5;
+      x -= startX / (timer.timeAdder) / (frameRate);
     }
     else {
-      x += blockLoc.size * 5;
+      x += startX / (timer.timeAdder) / (frameRate);
     }
 
     if (x <= 0) {
@@ -48,6 +56,31 @@ class Character {
     }
     else if (x >= startX) {
       isLeft = true;
+    }
+  }
+
+  void changeChar() {
+    // When the char turns
+    if (isLeft) {
+      currentSprite = slave.get(i);
+    }
+    else {
+      currentSprite = slaveInvert.get(i);
+    }
+
+    if (millis() >= seconds * 1000) {
+      seconds += timeAdder;
+      println(millis() / 1000);
+      if (++i >= 5) {
+        i = 0;
+      }
+
+      if (isLeft) {
+        currentSprite = slave.get(i);
+      }
+      else {
+        currentSprite = slaveInvert.get(i);
+      }
     }
   }
 }
