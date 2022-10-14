@@ -23,7 +23,7 @@ class NewLightning {
 
         angleOfLine = random(PI/4, 3 * PI/4);
 
-        this.originalDistance = width/15;
+        this.originalDistance = width/8;
         this.limitDistance = random(originalDistance/2) + originalDistance;
         
         end = new PVector(start.x + cos(angleOfLine) * this.limitDistance, start.y + sin(angleOfLine) * this.limitDistance);
