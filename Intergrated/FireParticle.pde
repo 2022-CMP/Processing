@@ -38,10 +38,13 @@ class FireParticle {
     }
 
     void run() {
+        pushMatrix();
         
         update();
         
         render();
+        
+        popMatrix();
     }
 
     // scattering fireworks expression
@@ -73,7 +76,7 @@ class FireParticle {
         image(img, 0, 0);
         
         popMatrix();
-        
+        tint(255, 255);
         /*// Drawing a circle instead
         fill(255,0,0, lifespan);
         noStroke();

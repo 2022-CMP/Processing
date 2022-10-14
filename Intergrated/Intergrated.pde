@@ -57,8 +57,11 @@ void draw () {
     slave.drawBlock(tower);
     tower.drawTower();
     slave.drawChar();
+    if (block != null) {
+      block.createBlock();
+      println("KKKKKKKKKK");
+    }
     
-
     // Demolising Powers 1
     lightnings.Update();
     fire.run();
@@ -84,6 +87,8 @@ void draw () {
     } else if(balloonAct == true) {//check  
         beforeWind(block);
     }
+    
+
 
 }
 
@@ -93,13 +98,12 @@ void mousePressed () {
     
     // Checking highest stack block
     if (!tower.Tower.isEmpty()) {
-        block = tower.Tower.pop();
+        block = tower.popBlock();
 
         if (key == '1')
             lightnings.ResetLightnings();
         else if (key == '2') {
             fire.startOfFireParticle(new PVector(block.x, block.y));
-            println(block.x);
         } else if (key == '3') {
             explosion = new ExplosionParticleSystem(new PVector(block.x, block.y));
             explosion.stratOfExplosion();
