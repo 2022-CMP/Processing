@@ -53,11 +53,6 @@ void setup() {
 void draw () {
     background(0xff, 0xff, 0xff);
     
-    // Checking highest stack block
-    if (!tower.Tower.isEmpty()) {
-        block = tower.Tower.peek();
-    }
-    
     // Stacking Tower
     slave.drawBlock(tower);
     tower.drawTower();
@@ -95,24 +90,30 @@ void draw () {
 
 // Initial version of integration
 void mousePressed () {
-    if (key == '1')
-        lightnings.ResetLightnings();
-    else if (key == '2') {
-        fire.startOfFireParticle(new PVector(block.x, block.y));
-        println(block.x);
-    } else if (key == '3') {
-        explosion = new ExplosionParticleSystem(new PVector(block.x, block.y));
-        explosion.stratOfExplosion();
-    } else if (key == '4') 
-        punchAct = true;
-    else if (key == '5')
-        chopstickAct = true;
-    else if (key == '6') {
-        if (balloonAct && (mouseX > block.x - block.size*10&&mouseX < block.x + block.size*10 && mouseY < block.y && mouseY > block.y - block.size * block.blockHeight)) {
-            balloonAttached = true;
-            balloonAct = false;
+    
+    // Checking highest stack block
+    if (!tower.Tower.isEmpty()) {
+        block = tower.Tower.pop();
+
+        if (key == '1')
+            lightnings.ResetLightnings();
+        else if (key == '2') {
+            fire.startOfFireParticle(new PVector(block.x, block.y));
+            println(block.x);
+        } else if (key == '3') {
+            explosion = new ExplosionParticleSystem(new PVector(block.x, block.y));
+            explosion.stratOfExplosion();
+        } else if (key == '4') 
+            punchAct = true;
+        else if (key == '5')
+            chopstickAct = true;
+        else if (key == '6') {
+            if (balloonAct && (mouseX > block.x - block.size*10&&mouseX < block.x + block.size*10 && mouseY < block.y && mouseY > block.y - block.size * block.blockHeight)) {
+                balloonAttached = true;
+                balloonAct = false;
+            }
         }
-    }
+    } 
 }
 
 void keyPressed() {

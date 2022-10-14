@@ -49,6 +49,10 @@ class FireParticleSystem {
             for (int i = 0 ; i < 2 ; i++)
                 addParticle();
         }
+
+        if (elapsedTime == endTime) {
+            block = null;
+        }
     }
 
     // Method to add a force vector to all fireParticles currently in the system

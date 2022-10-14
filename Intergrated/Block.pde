@@ -22,6 +22,9 @@ class Block {
     blockColor = _color;
     blockWidth = size * 40; blockHeight = size * 10;
     isTextureMode = false;
+
+    x = x + size * 80;
+    y = y + size * 60;
   }
 
   // Using TEXTURE(PImage)
@@ -34,12 +37,18 @@ class Block {
   }
 
   void createBlock() {
+    pushMatrix();
+    
+    translate(x, y);
+    
     if (isTextureMode) {
       drawTextureBlock();
     }
     else {
       drawColorBlock();
     }
+
+    popMatrix();
   }
 
   void drawTextureBlock() {
@@ -48,10 +57,10 @@ class Block {
     textureMode(NORMAL);
     beginShape();
     texture(img);
-    vertex(x + size * 80,              y + size * 60,                0, 0);
-    vertex(x + size * 80 + blockWidth, y + size * 60,                1, 0);
-    vertex(x + size * 80 + blockWidth, y + size * 60 + blockHeight,  1, 1);
-    vertex(x + size * 80,              y + size * 60 + blockHeight,  0, 1);
+    vertex(x - blockWidth/2,              y - blockHeight/2,  0, 0);
+    vertex(x + blockWidth/2,              y - blockHeight/2,  1, 0);
+    vertex(x + blockWidth/2,              y + blockHeight/2,  1, 1);
+    vertex(x - blockWidth/2,              y + blockHeight/2,  0, 1);
     endShape();
     
     return;
@@ -63,10 +72,10 @@ class Block {
 
     // DEFAULT BLOCK LOCATION
     beginShape();
-    vertex(x + size * 80,              y + size * 60,                0, 0);
-    vertex(x + size * 80 + blockWidth, y + size * 60,                0, 0);
-    vertex(x + size * 80 + blockWidth, y + size * 60 + blockHeight,  0, 0);
-    vertex(x + size * 80,              y + size * 60 + blockHeight,  0, 0);
+    vertex(x - blockWidth/2,              y - blockHeight/2,  0, 0);
+    vertex(x + blockWidth/2,              y - blockHeight/2,  0, 0);
+    vertex(x + blockWidth/2,              y + blockHeight/2,  0, 0);
+    vertex(x - blockWidth/2,              y + blockHeight/2,  0, 0);
     endShape(CLOSE);
     
     return;
