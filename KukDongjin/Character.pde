@@ -37,6 +37,7 @@ class Character {
 
   void drawChar() {
     changeChar();
+    imageMode(CENTER);
 
     if (isLeft) {
       image(currentSprite, x, y);
