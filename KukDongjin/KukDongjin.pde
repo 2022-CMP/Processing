@@ -17,7 +17,7 @@ void draw() {
   background(0xff, 0xff, 0xff);
   
   slave.drawBlock(tower);
-  tower.drawTower();
+  tower.drawTower();  
   slave.drawChar();
   demolishUI.drawPanel();
 }

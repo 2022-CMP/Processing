@@ -5,7 +5,7 @@ class DemolishUI {
   float size = width / 384;
 
   DemolishUI(float _x, float _y) {
-    x = _x; y = _y;
+    x = _x - size * 80; y = _y - size * 90;
     startX = x;
 
     buttonPanel.add(new Button(x, y, loadImage("fire.png")));
@@ -27,6 +27,4 @@ class DemolishUI {
     }
     x = startX;
   }
-
-
 }
