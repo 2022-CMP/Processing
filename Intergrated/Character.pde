@@ -7,7 +7,7 @@ class Character {
   // For Character Location
   Block blockLoc = new Block(width / 2, height / 2);
   float startX = blockLoc.x + blockLoc.size * 60;
-  float startY = blockLoc.y + blockLoc.size * 43;
+  float startY = blockLoc.y + blockLoc.size * 70;
   float x, y;
 
   // For Animation
@@ -19,6 +19,8 @@ class Character {
   int speed;
   
   Character(int _speed) {
+    // Initializing 
+    
     slave.add(loadImage("char1.png"));
     slave.add(loadImage("char2.png"));
     slave.add(loadImage("char3.png"));
@@ -36,16 +38,23 @@ class Character {
   }
 
   void drawChar() {
+    pushMatrix();
+    
+    translate(x, y);
+    imageMode(CENTER);
+    
     changeChar();
 
     if (isLeft) {
-      image(currentSprite, x, y);
+      image(currentSprite, 0, 0);
     }
     else {
-      image(currentSprite, x, y);
+      image(currentSprite, 0, 0);
     }
 
     moveChar();
+    
+    popMatrix();
   }
 
   void moveChar() {

@@ -40,7 +40,7 @@ class ExplosionParticle {
    
     tint(255, lifespan);
     image(img, 0, 0);
-    
+    tint(255, 255);
     /* draw 
     stroke(255, random(0,100), 0, lifespan);
     fill(255, random(0,100), 0, lifespan);
