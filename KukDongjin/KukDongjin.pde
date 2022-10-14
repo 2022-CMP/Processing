@@ -2,6 +2,7 @@ import java.util.*;
 
 boolean isTextureMode = false;
 Tower tower = new Tower();
+DemolishUI demolishUI;
 
 Character slave;
 
@@ -9,6 +10,7 @@ void setup() {
   size(displayWidth, displayHeight, P3D);
   
   slave = new Character(2);
+  demolishUI = new DemolishUI(width / 2, height / 2);
 }
 
 void draw() {
@@ -17,6 +19,7 @@ void draw() {
   slave.drawBlock(tower);
   tower.drawTower();
   slave.drawChar();
+  demolishUI.drawPanel();
 }
 
 void keyPressed() {
