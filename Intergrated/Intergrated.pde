@@ -8,7 +8,6 @@ Tower tower = new Tower();
 Character slave;
 Block block;
 
-
 // Demolishing Powers
 
 NewLightnings lightnings; // 01. Lightnings
@@ -48,19 +47,25 @@ void setup() {
 
     // Wind
     balloon = loadImage("balloon.png"); // image thanks for flaticon
+
+
+
+    block = new Block(width / 3, height / 3, color(random(255), random(255), random(255)));
 }
 
 void draw () {
     background(0xff, 0xff, 0xff);
     
     // Stacking Tower
+    if (block != null) {
+      block.createBlock();
+      println(block.x + "    " + block.y);
+    }
+
     slave.drawBlock(tower);
     tower.drawTower();
     slave.drawChar();
-    if (block != null) {
-      block.createBlock();
-      println("KKKKKKKKKK");
-    }
+    
     
     // Demolising Powers 1
     lightnings.Update();
@@ -87,9 +92,11 @@ void draw () {
     } else if(balloonAct == true) {//check  
         beforeWind(block);
     }
-    
+}
 
 
+void BlockRemove () {
+    block = null;
 }
 
 

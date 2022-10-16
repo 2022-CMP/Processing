@@ -5,8 +5,10 @@ class FireParticleSystem {
     PImage img;
 
     int origianlDuringTime = 2;
-    int elapsedTime = second();
-    int endTime = 0;
+    float elapsedTime = millis();
+    float endTime = 0;
+
+    boolean isRunning;
 
     FireParticleSystem(int num, PVector blockLocation) {
         // Initializing
@@ -18,6 +20,8 @@ class FireParticleSystem {
         for (int i = 0; i < num; i++) {
         fireParticles.add(new FireParticle(origin));         
         }
+
+        isRunning = false;
     }
 
     FireParticleSystem(int num, PVector blockLocation, PImage img_) {
@@ -29,13 +33,14 @@ class FireParticleSystem {
         for (int i = 0; i < num; i++) {
         fireParticles.add(new FireParticle(origin, img));         // Add "num" amount of fireParticles to the arraylist
         }
+
+        isRunning = false;
     }
 
     // play all particles
     void run() {
-        elapsedTime = second();
+        elapsedTime = millis();
 
-        
         for (int i = fireParticles.size()-1; i >= 0; i--) {
             FireParticle p = fireParticles.get(i);
             p.run();
@@ -48,10 +53,11 @@ class FireParticleSystem {
         if (elapsedTime < endTime) {
             for (int i = 0 ; i < 2 ; i++)
                 addParticle();
-        }
+        } else if (isRunning) {
+            isRunning = false;
 
-        if (elapsedTime == endTime) {
-            block = null;
+            // signal
+            BlockRemove();
         }
     }
 
@@ -73,11 +79,18 @@ class FireParticleSystem {
     }
 
     void startOfFireParticle () {
-        endTime = second() + origianlDuringTime;
+        if (endTime < millis()) {
+            endTime = millis() + 2000;
+            isRunning = true;
+        }
     }
 
     void startOfFireParticle (PVector blockPosition) {
-        origin = blockPosition;
-        endTime = second() + origianlDuringTime;
+        if (endTime < millis()) 
+        {
+            origin = blockPosition;
+            endTime = millis() + 2000;
+            isRunning = true;
+        }
     }
 }

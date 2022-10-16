@@ -7,9 +7,12 @@ class ExplosionParticleSystem {
 
   PImage img;
 
-  int origianlDuringTime = 2;
-  int elapsedTime = second();
-  int endTime = 0;
+  int origianlDuringTime = 2000;
+  float elapsedTime = millis();
+  float endTime = 0;
+
+  // Check Running
+  boolean isRunning = false; 
 
   ExplosionParticleSystem(PVector position) {
     origin = position.copy();
@@ -23,11 +26,16 @@ class ExplosionParticleSystem {
   }
 
   void run() {
-    elapsedTime = second();
+    elapsedTime = millis();
 
     if (elapsedTime < endTime) {
       for (int i = 0 ; i < 3 ; i++)
         addParticle();
+    } else if (isRunning) {
+      isRunning = false;
+
+      // signal
+      BlockRemove();
     }
 
     for (int i = particles.size()-1; i >= 0; i--) {
@@ -40,7 +48,11 @@ class ExplosionParticleSystem {
   }
 
   void stratOfExplosion () {
-      endTime = second() + origianlDuringTime;
+      if (endTime < millis()) {
+        endTime = millis() + origianlDuringTime;
+
+        isRunning = true;
+      }
   }
 
 }

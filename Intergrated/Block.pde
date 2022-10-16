@@ -37,9 +37,6 @@ class Block {
   }
 
   void createBlock() {
-    pushMatrix();
-    
-    translate(x, y);
     
     if (isTextureMode) {
       drawTextureBlock();
@@ -47,8 +44,7 @@ class Block {
     else {
       drawColorBlock();
     }
-
-    popMatrix();
+    
   }
 
   void drawTextureBlock() {

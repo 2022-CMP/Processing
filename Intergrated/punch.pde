@@ -1,6 +1,7 @@
 float punchTimeChecker = 0;
 PImage windowBreak;
 PImage punchM;
+
 void Punching(Block block) {
   Block block_ = block;
   punchTimeChecker +=0.1;

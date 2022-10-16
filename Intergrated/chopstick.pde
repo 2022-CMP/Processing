@@ -12,14 +12,14 @@ void Chopstick(Block block) {
     ty = lerp(0, block_.y - block_.size*block.blockHeight*5/2, t);
     pushMatrix();
     imageMode(CENTER);
-    block_.createBlock();
+    // block_.createBlock();
     image(chopstick, tx, ty, block_.size*block_.blockHeight*5, block_.size*block_.blockHeight*5);
     popMatrix();
   } else if (block_.y >0) {
     block_.y -=5;
     pushMatrix();
     imageMode(CENTER);
-    block_.createBlock();
+    // block_.createBlock();
     image(chopstick,block_.x*14/11,block_.y - block_.size*block.blockHeight*5/2,block_.size*block_.blockHeight*5, block_.size*block_.blockHeight*5);
     popMatrix();
   } else {
