@@ -4,6 +4,15 @@ class DemolishUI {
   float startX;
   float size = width / 384;
 
+  /**
+   * *  ORDER OF BUTTONS
+   * 1. FIRE
+   * 2. BOMB
+   * 3. LIGHTNING
+   * 4. PUNCH
+   * 5. WIND
+   * 6. CHOPSTICK
+   */
   DemolishUI(float _x, float _y) {
     x = _x - size * 80; y = _y - size * 90;
     startX = x;
