@@ -24,7 +24,8 @@ boolean balloonAct = false;
 
 
 void setup() {
-    size(1000, 1000, P3D);
+    size(displayWidth, displayHeight, P3D);
+    // size(1000, 1000, P3D);
     
     // Stacking Tower
     slave = new Character(2);
@@ -47,10 +48,6 @@ void setup() {
 
     // Wind
     balloon = loadImage("balloon.png"); // image thanks for flaticon
-
-
-
-    block = new Block(width / 3, height / 3, color(random(255), random(255), random(255)));
 }
 
 void draw () {
@@ -78,7 +75,9 @@ void draw () {
     // Punch
     if (punchAct == true) {//function start
         Punching(block);
-        block.y -=10;
+
+        if (block != null)
+            block.y -=10;
     }
 
     // Chopsticks
@@ -105,6 +104,14 @@ void mousePressed () {
     
     // Checking highest stack block
     if (!tower.Tower.isEmpty()) {
+        if (block != null && (punchAct || balloonAttached || chopstickAct)) {
+            punchAct = false;
+            balloonAttached = false;
+            chopstickAct = false;
+
+            BlockRemove();
+        }
+
         block = tower.popBlock();
 
         if (key == '1')

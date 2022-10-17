@@ -24,6 +24,7 @@ void Chopstick(Block block) {
     popMatrix();
   } else {
     chopstickAct = false;
+    BlockRemove();
     t = 0;
   }
 }

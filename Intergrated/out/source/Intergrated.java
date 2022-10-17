@@ -44,6 +44,7 @@ boolean balloonAct = false;
 
  public void setup() {
     /* size commented out by preprocessor */;
+    // size(1000, 1000, P3D);
     
     // Stacking Tower
     slave = new Character(2);
@@ -66,10 +67,6 @@ boolean balloonAct = false;
 
     // Wind
     balloon = loadImage("balloon.png"); // image thanks for flaticon
-
-
-
-    block = new Block(width / 3, height / 3, color(random(255), random(255), random(255)));
 }
 
  public void draw () {
@@ -97,7 +94,9 @@ boolean balloonAct = false;
     // Punch
     if (punchAct == true) {//function start
         Punching(block);
-        block.y -=10;
+
+        if (block != null)
+            block.y -=10;
     }
 
     // Chopsticks
@@ -124,6 +123,14 @@ boolean balloonAct = false;
     
     // Checking highest stack block
     if (!tower.Tower.isEmpty()) {
+        if (block != null && (punchAct || balloonAttached || chopstickAct)) {
+            punchAct = false;
+            balloonAttached = false;
+            chopstickAct = false;
+
+            BlockRemove();
+        }
+
         block = tower.popBlock();
 
         if (key == '1')
@@ -196,11 +203,12 @@ class Block {
     else {
       drawColorBlock();
     }
-    
+
   }
 
    public void drawTextureBlock() {
     noStroke();
+    blockWidth = size * 40; blockHeight = size * 10;
     
     textureMode(NORMAL);
     beginShape();
@@ -217,6 +225,8 @@ class Block {
    public void drawColorBlock() {
     noStroke();
     fill(blockColor);
+
+    blockWidth = size * 40; blockHeight = size * 10;
 
     // DEFAULT BLOCK LOCATION
     beginShape();
@@ -833,6 +843,7 @@ float t = 0;
     popMatrix();
   } else {
     chopstickAct = false;
+    BlockRemove();
     t = 0;
   }
 }
@@ -842,24 +853,37 @@ PImage punchM;
 
  public void Punching(Block block) {
   Block block_ = block;
+
   punchTimeChecker +=0.1f;
-  if (punchTimeChecker <1) {
-    pushMatrix();
-    imageMode(CENTER);
-    image(windowBreak, width/2, height/2, width, height);
-    image(punchM, block_.x, height*3/4, width/3, height/2);
-    popMatrix();
-  } //else if (punchTimeChecker >=1) background(200);
-  if (block_.size >0)
-    block_.size -=0.3f;
-  block_.createBlock();
-  if(block_.size <=0) punchAct = false; //block go to outside of window finish the function
+  if (punchTimeChecker < 1) {
+    if (block != null) {
+      pushMatrix();
+      imageMode(CENTER);
+      image(windowBreak, width/2, height/2, width, height);
+      image(punchM, block_.x, height*3/4, width/3, height/2);
+      popMatrix();
+    }
+  } 
+  
+  if (!(block_.size <= 0)) {
+    block.size -= block.size/30;
+  }
+  
+  if (block.y <= 0) {
+      punchAct = false; //block go to outside of window finish the function
+      BlockRemove();
+
+      punchTimeChecker = 0;
+  }
 }
 PImage balloon;
  public void beforeWind(Block block) { // if balloon function start balloon follow mouse
   pushMatrix();
   imageMode(CENTER);
-  image(balloon, mouseX, mouseY, block.size*block.blockHeight*2, block.size*block.blockHeight*2);
+  
+  if (!tower.Tower.isEmpty())
+    image(balloon, mouseX, mouseY, tower.Tower.peek().size*tower.Tower.peek().blockHeight*2, tower.Tower.peek().size*tower.Tower.peek().blockHeight*2);
+  
   popMatrix();
 }
 
@@ -872,11 +896,14 @@ PImage balloon;
   imageMode(CENTER);
   image(balloon, block_.x, block_.y -block.size*block.blockHeight*2, block.size*block.blockHeight*2, block.size*block.blockHeight*2);
   popMatrix();
-  if (block_.y<0)balloonAttached = false; // finish the function
+  if (block_.y<0) {
+    balloonAttached = false; // finish the function
+    BlockRemove();
+  }
 }
 
 
-  public void settings() { size(1000, 1000, P3D); }
+  public void settings() { size(displayWidth, displayHeight, P3D); }
 
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Intergrated" };

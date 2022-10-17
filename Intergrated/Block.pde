@@ -44,11 +44,12 @@ class Block {
     else {
       drawColorBlock();
     }
-    
+
   }
 
   void drawTextureBlock() {
     noStroke();
+    blockWidth = size * 40; blockHeight = size * 10;
     
     textureMode(NORMAL);
     beginShape();
@@ -65,6 +66,8 @@ class Block {
   void drawColorBlock() {
     noStroke();
     fill(blockColor);
+
+    blockWidth = size * 40; blockHeight = size * 10;
 
     // DEFAULT BLOCK LOCATION
     beginShape();
