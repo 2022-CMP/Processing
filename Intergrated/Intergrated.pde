@@ -22,6 +22,9 @@ boolean chopstickAct = false;
 boolean balloonAttached =false;
 boolean balloonAct = false;
 
+// 22.10.18 : GameOver
+GameOver gameOver;
+
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -48,6 +51,10 @@ void setup() {
 
     // Wind
     balloon = loadImage("balloon.png"); // image thanks for flaticon
+
+
+    // 22.10.18 : GameOver
+    gameOver = new GameOver();
 }
 
 void draw () {
@@ -91,6 +98,10 @@ void draw () {
     } else if(balloonAct == true) {//check  
         beforeWind(block);
     }
+
+
+    // 22.10.18 : Game Over
+    gameOver.run();
 }
 
 
