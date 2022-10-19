@@ -25,6 +25,9 @@ boolean balloonAct = false;
 // 22.10.18 : GameOver
 GameOver gameOver;
 
+// 22.10.19 : Change the difficulty
+float startTime;
+float EachLevelPeriod;
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -55,6 +58,10 @@ void setup() {
 
     // 22.10.18 : GameOver
     gameOver = new GameOver();
+
+    // 22.10.19 : Change Difficulty
+    startTime = millis();
+    EachLevelPeriod = 2000;
 }
 
 void draw () {
@@ -102,6 +109,12 @@ void draw () {
 
     // 22.10.18 : Game Over
     gameOver.run();
+
+    // 22.10.19 : Change the Difficulty
+    if (millis() - startTime > EachLevelPeriod)  {
+        startTime += EachLevelPeriod;
+        slave.speed += 1;
+    }
 }
 
 
