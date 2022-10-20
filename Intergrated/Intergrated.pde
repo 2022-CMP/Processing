@@ -22,6 +22,12 @@ boolean chopstickAct = false;
 boolean balloonAttached =false;
 boolean balloonAct = false;
 
+// 22.10.18 : GameOver
+GameOver gameOver;
+
+// 22.10.19 : Change the difficulty
+float startTime;
+float EachLevelPeriod;
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -48,6 +54,14 @@ void setup() {
 
     // Wind
     balloon = loadImage("balloon.png"); // image thanks for flaticon
+
+
+    // 22.10.18 : GameOver
+    gameOver = new GameOver();
+
+    // 22.10.19 : Change Difficulty
+    startTime = millis();
+    EachLevelPeriod = 10000;
 }
 
 void draw () {
@@ -90,6 +104,16 @@ void draw () {
         wind(block);
     } else if(balloonAct == true) {//check  
         beforeWind(block);
+    }
+
+
+    // 22.10.18 : Game Over
+    gameOver.run();
+
+    // 22.10.19 : Change the Difficulty
+    if (millis() - startTime > EachLevelPeriod)  {
+        startTime += EachLevelPeriod;
+        slave.speed += 1;
     }
 }
 
