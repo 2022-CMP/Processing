@@ -34,7 +34,7 @@ class GameOver {
         pushMatrix();
         
         translate(width/2, height/2, 0);
-        textFont(font, 30);
+        textFont(font, height/20);
         textAlign(CENTER);
         text(gameOverMessage, 0, 0);
 

@@ -61,7 +61,7 @@ void setup() {
 
     // 22.10.19 : Change Difficulty
     startTime = millis();
-    EachLevelPeriod = 2000;
+    EachLevelPeriod = 10000;
 }
 
 void draw () {
