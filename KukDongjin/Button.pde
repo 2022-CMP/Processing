@@ -16,8 +16,7 @@ class Button {
         mouseY >= y && mouseY <= y + size * 30 && !tower.Tower.isEmpty()) {
       if (str.equals("Fire")) {
         Block temp = tower.popBlock();
-        println('t');
-        fire.startOfFireParticle(new PVector(temp.x, temp.y));
+        fire.startOfFireParticle(temp.getBlockCenter());
       }
     }
   }

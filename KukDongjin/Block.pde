@@ -71,4 +71,8 @@ class Block {
     
     return;
   }
+
+  PVector getBlockCenter() {
+    return new PVector(((x + size * 80) * 2 + blockWidth) / 2, ((y + size * 60) * 2 + blockHeight) / 2);
+  }
 }
