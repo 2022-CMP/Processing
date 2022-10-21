@@ -56,6 +56,9 @@ PImage background;
 // 22.10.21 : Music & Effets
 SoundManager soundManager;
 
+// 22.10.22 : WeatherAPI
+WeatherAPI weatherAPI;
+
  public void setup() {
     /* size commented out by preprocessor */;
     // size(1000, 1000, P3D);
@@ -97,6 +100,9 @@ SoundManager soundManager;
 
     // 22.10.20 : Music & Effects
     soundManager = new SoundManager();
+    
+    // 22.10.21 : Weather API
+    weatherAPI = new WeatherAPI();
 }
 
  public void draw () {
@@ -143,7 +149,6 @@ SoundManager soundManager;
         beforeWind(block);
     }
 
-
     // 22.10.18 : Game Over
     gameOver.run();
 
@@ -152,6 +157,9 @@ SoundManager soundManager;
         startTime += EachLevelPeriod;
         slave.speed += 1;
     }
+    
+    // 22.10.21 : WeatherAPI
+    weatherAPI.run();
 }
 
 
@@ -314,6 +322,9 @@ class Character {
   int i = 0;
   int speed;
   
+  // Block Image
+  ArrayList<PImage> BlockImages;
+  
   Character(int _speed) {
     // Initializing 
     
@@ -331,6 +342,11 @@ class Character {
 
     x = startX; y = startY;
     speed = _speed;
+    
+    BlockImages = new ArrayList<PImage>();
+    for (int i = 1 ; i <= 5; i ++) {
+        BlockImages.add(loadImage("Block" + i + ".png"));
+    }
   }
 
    public void drawChar() {
@@ -396,7 +412,7 @@ class Character {
    public void drawBlock(Tower tower) {
     if (x >= startX) {
       if (isTextureMode) {
-        tower.pushBlock(new Block(width / 2, height / 2, loadImage("Block.jpg"))); // this is problem!!!!!! - Difference Between two of them.
+        tower.pushBlock(new Block(width / 2, height / 2, BlockImages.get((int)random(1, BlockImages.size())))); 
       }
       else {
         tower.pushBlock(new Block(width / 2, height / 2, color(random(255), random(255), random(255))));
@@ -735,7 +751,7 @@ class GameOver {
             firstStart = false;
 
             lineHeight = tower.Tower.peek().blockHeight;
-            font1 = createFont("h8514fix", 16);
+            font1 = createFont("Arial", 16);
         }
 
         GameOverCheck();
@@ -850,6 +866,8 @@ class NewLightning {
                 s2.show();
             }
         }
+
+        strokeWeight(0);
     }
 }
 class NewLightnings {
@@ -907,11 +925,11 @@ class SoundManager {
             soundCollection.put(soundName, new SoundFile(myClass, soundName));
         }
 
-        // soundCollection.get("Song.mp3").loop(); (Background Music)
+        // soundCollection.get("Song.mp3").loop(); // (Background Music)
     }
 
      public void SoundPlay (String soundName) {
-        soundCollection.get("soundName").play();
+        soundCollection.get(soundName).play();
     }
 }
 class Tower {
@@ -1012,15 +1030,6 @@ class WeatherAPI {
             image(weatherImage[1],width - height/5,height/7,height/8,height/8);
         }
     }
-
-
- public void setup() {
-  /* size commented out by preprocessor */;
-  JSONObject json = loadJSONObject(wurl);
-  println(json);
-  String t = json.getJSONArray("weather").getJSONObject(0).getString("icon");
-  println(t + " success?");
-}
 }
 PImage chopstick;
 float t = 0;
@@ -1032,7 +1041,7 @@ float t = 0;
   float ty;
 
   if (t<1) {
-    tx = lerp(width, block_.x*14/11, t);
+    tx = lerp(width, block_.x*16/11, t);
     ty = lerp(0, block_.y - block_.size*block.blockHeight*5/2, t);
     pushMatrix();
     imageMode(CENTER);
@@ -1044,7 +1053,7 @@ float t = 0;
     pushMatrix();
     imageMode(CENTER);
     // block_.createBlock();
-    image(chopstick,block_.x*14/11,block_.y - block_.size*block.blockHeight*5/2,block_.size*block_.blockHeight*5, block_.size*block_.blockHeight*5);
+    image(chopstick,block_.x*16/11,block_.y - block_.size*block.blockHeight*5/2,block_.size*block_.blockHeight*5, block_.size*block_.blockHeight*5);
     popMatrix();
   } else {
     chopstickAct = false;
@@ -1087,7 +1096,7 @@ PImage balloon;
   imageMode(CENTER);
   
   if (!tower.Tower.isEmpty())
-    image(balloon, mouseX, mouseY, tower.Tower.peek().size*tower.Tower.peek().blockHeight*2, tower.Tower.peek().size*tower.Tower.peek().blockHeight*2);
+    image(balloon, mouseX, mouseY, tower.Tower.peek().size*tower.Tower.peek().blockHeight, tower.Tower.peek().size*tower.Tower.peek().blockHeight);
   
   popMatrix();
 }
@@ -1099,7 +1108,7 @@ PImage balloon;
   block_.createBlock();
   pushMatrix();
   imageMode(CENTER);
-  image(balloon, block_.x, block_.y -block.size*block.blockHeight*2, block.size*block.blockHeight*2, block.size*block.blockHeight*2);
+  image(balloon, block_.x, block_.y -block.blockHeight/2, block.size*block.blockHeight, block.size*block.blockHeight);
   popMatrix();
   if (block_.y<0) {
     balloonAttached = false; // finish the function
@@ -1108,7 +1117,7 @@ PImage balloon;
 }
 
 
-  public void settings() { size(800, 600, P3D); }
+  public void settings() { size(displayWidth, displayHeight, P3D); }
 
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Intergrated" };

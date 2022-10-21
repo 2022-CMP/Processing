@@ -4,7 +4,7 @@ void beforeWind(Block block) { // if balloon function start balloon follow mouse
   imageMode(CENTER);
   
   if (!tower.Tower.isEmpty())
-    image(balloon, mouseX, mouseY, tower.Tower.peek().size*tower.Tower.peek().blockHeight*2, tower.Tower.peek().size*tower.Tower.peek().blockHeight*2);
+    image(balloon, mouseX, mouseY, tower.Tower.peek().size*tower.Tower.peek().blockHeight, tower.Tower.peek().size*tower.Tower.peek().blockHeight);
   
   popMatrix();
 }
@@ -16,7 +16,7 @@ void wind(Block block) { // balloon attached and fly away
   block_.createBlock();
   pushMatrix();
   imageMode(CENTER);
-  image(balloon, block_.x, block_.y -block.size*block.blockHeight*2, block.size*block.blockHeight*2, block.size*block.blockHeight*2);
+  image(balloon, block_.x, block_.y -block.blockHeight/2, block.size*block.blockHeight, block.size*block.blockHeight);
   popMatrix();
   if (block_.y<0) {
     balloonAttached = false; // finish the function

@@ -84,5 +84,7 @@ class NewLightning {
                 s2.show();
             }
         }
+
+        strokeWeight(0);
     }
 }
