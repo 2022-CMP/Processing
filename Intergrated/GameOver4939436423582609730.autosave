@@ -5,7 +5,7 @@ class GameOver {
     boolean IsGameOver = false;
     boolean firstStart = true;
     // Font
-    PFont font1;
+    PFont font;
     String gameOverMessage = "Game Over!";
     float lineHeight;
     
@@ -22,7 +22,7 @@ class GameOver {
             firstStart = false;
 
             lineHeight = tower.Tower.peek().blockHeight;
-            font1 = createFont("Arial", 16);
+            font = createFont("BAUHS93", 16);
         }
 
         GameOverCheck();
@@ -38,7 +38,7 @@ class GameOver {
         pushMatrix();
         
         translate(width/2, height/2, 0);
-        textFont(font1, height/20);
+        textFont(font, height/20);
         textAlign(CENTER);
         text(gameOverMessage, 0, 0);
 

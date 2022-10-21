@@ -18,6 +18,9 @@ class Character {
   int i = 0;
   int speed;
   
+  // Block Image
+  ArrayList<PImage> BlockImages;
+  
   Character(int _speed) {
     // Initializing 
     
@@ -35,6 +38,11 @@ class Character {
 
     x = startX; y = startY;
     speed = _speed;
+    
+    BlockImages = new ArrayList<PImage>();
+    for (int i = 1 ; i <= 5; i ++) {
+        BlockImages.add(loadImage("Block" + i + ".png"));
+    }
   }
 
   void drawChar() {
@@ -100,7 +108,7 @@ class Character {
   void drawBlock(Tower tower) {
     if (x >= startX) {
       if (isTextureMode) {
-        tower.pushBlock(new Block(width / 2, height / 2, loadImage("Block.jpg"))); // this is problem!!!!!! - Difference Between two of them.
+        tower.pushBlock(new Block(width / 2, height / 2, BlockImages.get((int)random(1, BlockImages.size())))); 
       }
       else {
         tower.pushBlock(new Block(width / 2, height / 2, color(random(255), random(255), random(255))));
