@@ -57,7 +57,7 @@ class FireParticleSystem {
             isRunning = false;
 
             // signal
-            //BlockRemove();
+            BlockRemove();
         }
     }
 
