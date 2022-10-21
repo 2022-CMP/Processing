@@ -17,12 +17,18 @@ class DemolishUI {
     x = _x - size * 80; y = _y - size * 90;
     startX = x;
 
+    // DIRTY CODE... Will Fix it Later
     buttonPanel.add(new Button(x, y, loadImage("fire.png"), "Fire"));
-    /*buttonPanel.add(new Button(x, y, loadImage("bomb.png")));
-    buttonPanel.add(new Button(x, y, loadImage("lightning.png")));
-    buttonPanel.add(new Button(x, y, loadImage("punch.png")));
-    buttonPanel.add(new Button(x, y, loadImage("wind.png")));
-    buttonPanel.add(new Button(x, y, loadImage("chopstick.png")));*/
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("bomb.png"), "Bomb"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("lightning.png"), "Lightning"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("punch.png"), "Punch"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("wind.png"), "Wind"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("chopstickUI.png"), "Chopstick"));
   }
 
   void drawPanel() {
