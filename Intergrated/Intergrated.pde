@@ -129,7 +129,6 @@ void draw () {
         beforeWind(block);
     }
 
-
     // 22.10.18 : Game Over
     gameOver.run();
 

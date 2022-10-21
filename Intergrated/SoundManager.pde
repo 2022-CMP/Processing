@@ -15,10 +15,10 @@ class SoundManager {
             soundCollection.put(soundName, new SoundFile(myClass, soundName));
         }
 
-        // soundCollection.get("Song.mp3").loop(); (Background Music)
+        // soundCollection.get("Song.mp3").loop(); // (Background Music)
     }
 
     void SoundPlay (String soundName) {
-        soundCollection.get("soundName").play();
+        soundCollection.get(soundName).play();
     }
 }
