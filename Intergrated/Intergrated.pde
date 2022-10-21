@@ -23,18 +23,29 @@ boolean balloonAttached =false;
 boolean balloonAct = false;
 
 // 22.10.18 : GameOver
-GameOver gameOver;
+GameOver gameOver; 
 
 // 22.10.19 : Change the difficulty
 float startTime;
 float EachLevelPeriod;
 
+// 22.10.20 : Background Image
+PImage background;
+
+// 22.10.21 : Music & Effets
+SoundManager soundManager;
+
 void setup() {
     size(displayWidth, displayHeight, P3D);
     // size(1000, 1000, P3D);
+
+    // 22.10.20 : Background Image
+    background = loadImage("Background.png");
     
     // Stacking Tower
     slave = new Character(2);
+    // 22.10.20 : texture - block
+    isTextureMode = true;
 
 
     // Demolising Powers 1
@@ -62,10 +73,15 @@ void setup() {
     // 22.10.19 : Change Difficulty
     startTime = millis();
     EachLevelPeriod = 10000;
+
+    // 22.10.20 : Music & Effects
+    soundManager = new SoundManager();
 }
 
 void draw () {
     background(0xff, 0xff, 0xff);
+    imageMode(CORNER);
+    image(background, 0, 0, width, height);
     
     // Stacking Tower
     if (block != null) {

@@ -7,17 +7,21 @@ class GameOver {
     // Font
     PFont font;
     String gameOverMessage = "Game Over!";
+    float lineHeight;
     
 
     void GameOverCheck () {
-        if (tower.Tower.peek().y < tower.Tower.peek().blockHeight * 2)
-            IsGameOver = true;
+        if (!tower.Tower.isEmpty()) {
+            if (tower.Tower.peek().y < tower.Tower.peek().blockHeight * 2)
+                IsGameOver = true;
+        }
     }
 
     void run () {
         if (firstStart) {
             firstStart = false;
 
+            lineHeight = tower.Tower.peek().blockHeight;
             font = createFont("BAUHS93", 16);
         }
 
@@ -44,6 +48,6 @@ class GameOver {
     void GameOverLineDraw () {
         stroke(255, 0, 0);
         fill(255, 0, 0);
-        rect(0, tower.Tower.peek().blockHeight, width, 10);
+        rect(0, lineHeight, width, 10);
     }
 }

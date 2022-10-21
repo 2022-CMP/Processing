@@ -8,7 +8,7 @@ class NewLightnings {
     void Update () {
         if(firstOccur) {
             firstOccur = false;
-            for (int i = 0 ; i < 3 ; i++)
+            for (int i = 0 ; i < 7 ; i++)
                 lightnings.add(new NewLightning(new PVector(random(0, width), 0), 0, 7));
 
             isRunning = true;

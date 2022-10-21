@@ -100,7 +100,7 @@ class Character {
   void drawBlock(Tower tower) {
     if (x >= startX) {
       if (isTextureMode) {
-        tower.pushBlock(new Block(width / 2, height / 2, loadImage("sunflower.jpg"))); // this is problem!!!!!! - Difference Between two of them.
+        tower.pushBlock(new Block(width / 2, height / 2, loadImage("Block.jpg"))); // this is problem!!!!!! - Difference Between two of them.
       }
       else {
         tower.pushBlock(new Block(width / 2, height / 2, color(random(255), random(255), random(255))));

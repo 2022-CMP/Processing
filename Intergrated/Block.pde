@@ -34,9 +34,14 @@ class Block {
     img = _img;
     blockWidth = size * 40; blockHeight = size * 10;
     isTextureMode = true;
+
+    x = x + size * 80;
+    y = y + size * 60;
   }
 
   void createBlock() {
+    
+    pushMatrix();
     
     if (isTextureMode) {
       drawTextureBlock();
@@ -45,20 +50,28 @@ class Block {
       drawColorBlock();
     }
 
+    popMatrix();
   }
 
   void drawTextureBlock() {
     noStroke();
     blockWidth = size * 40; blockHeight = size * 10;
     
+    pushMatrix();
+    
+    translate(x, y);
+    scale(map(y, height, 0, 3, 1), 1); 
+
     textureMode(NORMAL);
     beginShape();
     texture(img);
-    vertex(x - blockWidth/2,              y - blockHeight/2,  0, 0);
-    vertex(x + blockWidth/2,              y - blockHeight/2,  1, 0);
-    vertex(x + blockWidth/2,              y + blockHeight/2,  1, 1);
-    vertex(x - blockWidth/2,              y + blockHeight/2,  0, 1);
+    vertex(- blockWidth/2,              - blockHeight/2,  0, 0);
+    vertex(+ blockWidth/2,              - blockHeight/2,  1, 0);
+    vertex(+ blockWidth/2,              + blockHeight/2,  1, 1);
+    vertex(- blockWidth/2,              + blockHeight/2,  0, 1);
     endShape();
+
+    popMatrix();
     
     return;
   }
