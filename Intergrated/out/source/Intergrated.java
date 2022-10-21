@@ -20,6 +20,7 @@ public class Intergrated extends PApplet {
 
 
 
+PApplet myClass = this;
 
 // Stacking Tower of Babel
 boolean isTextureMode = false;
@@ -51,6 +52,9 @@ float EachLevelPeriod;
 
 // 22.10.20 : Background Image
 PImage background;
+
+// 22.10.21 : Music & Effets
+SoundManager soundManager;
 
  public void setup() {
     /* size commented out by preprocessor */;
@@ -90,6 +94,9 @@ PImage background;
     // 22.10.19 : Change Difficulty
     startTime = millis();
     EachLevelPeriod = 10000;
+
+    // 22.10.20 : Music & Effects
+    soundManager = new SoundManager();
 }
 
  public void draw () {
@@ -711,7 +718,7 @@ class GameOver {
     boolean IsGameOver = false;
     boolean firstStart = true;
     // Font
-    PFont font;
+    PFont font1;
     String gameOverMessage = "Game Over!";
     float lineHeight;
     
@@ -728,7 +735,7 @@ class GameOver {
             firstStart = false;
 
             lineHeight = tower.Tower.peek().blockHeight;
-            font = createFont("BAUHS93", 16);
+            font1 = createFont("h8514fix", 16);
         }
 
         GameOverCheck();
@@ -744,7 +751,7 @@ class GameOver {
         pushMatrix();
         
         translate(width/2, height/2, 0);
-        textFont(font, height/20);
+        textFont(font1, height/20);
         textAlign(CENTER);
         text(gameOverMessage, 0, 0);
 
@@ -885,28 +892,28 @@ class NewLightnings {
 }
 
 
-// By using HashMap, How about soundFile call by that String?
+class SoundManager {
+    // By using HashMap, How about soundFile call by that String?
 
-SoundFile[] song = new SoundFile[3]; 
+    HashMap<String,SoundFile> soundCollection = new HashMap<String,SoundFile>();
+    String[] soundNames = {"Soundsample.mp3",
+                            
+                            
+                            };
 
-/*
+    SoundManager () {
+      // Please Put sounds to soundCollection
+        for(String soundName : soundNames) {
+            soundCollection.put(soundName, new SoundFile(myClass, soundName));
+        }
 
-void setup() {
-  size(800, 600);
-  background(255);
-  for(int i =0;i<song.length;i++)
-  song[i] =  new SoundFile(this, "Soundsample.mp3"); 
-  song[0].loop(); // 배경음악에 사용할 듯
+        // soundCollection.get("Song.mp3").loop(); (Background Music)
+    }
+
+     public void SoundPlay (String soundName) {
+        soundCollection.get("soundName").play();
+    }
 }
-
-void draw() {
-}
-
-void mousePressed() {
-  if ( mouseButton == LEFT) {
-    song[1].play(); // 이펙트 (필요하다면 동작마다 1개씩 + 무너지는 사운드(?) 정도)
-  }
-}*/
 class Tower {
   Stack<Block> Tower = new Stack<>();
 
@@ -941,6 +948,79 @@ class Tower {
    public Block popBlock() {
     return Tower.pop();
   }
+}
+class WeatherAPI {
+    // Weather
+    String API_KEY = "4d54a1ec2d1746a823e46b9a79d59fde";
+    String wurl = "https://api.openweathermap.org/data/2.5/weather?q=Suwon,kr&lat={lat}&lon={lon}&appid="+API_KEY;
+    JSONObject weatherInfo;
+    PImage weatherImage[] = new PImage[4]; // thanks for flaticon ()
+    String tw;
+    
+    PFont font;
+    
+    // Time
+    String turl = "http://worldtimeapi.org/api/timezone/Asia/Seoul";
+    JSONObject tjson;
+    String tt;
+
+
+    WeatherAPI () {
+        // Weather
+        weatherInfo = loadJSONObject(wurl);
+        font = createFont("h8514fix",height/12); // thanks for microsoft
+        for(int i =0;i<4;i++){
+            weatherImage[i] = loadImage("Weather"+i+".png");
+        }
+
+        tw = weatherInfo.getJSONArray("weather").getJSONObject(0).getString("icon");
+
+        // Time
+        tjson = loadJSONObject(turl);
+        tt = tjson.getString("datetime");
+        tt = tt.substring(tt.length() - 21, tt.length() - 16);
+    }
+
+
+    int s;
+    boolean sCheck = false;
+
+     public void run () {
+        s = second();
+        if (s == 0 && sCheck == false) {
+            tjson = loadJSONObject(turl);
+            tt = tjson.getString("datetime");
+            tt = tt.substring(tt.length() - 21, tt.length() - 16);
+            weatherInfo = loadJSONObject(wurl);
+            tw = weatherInfo.getJSONArray("weather").getJSONObject(0).getString("icon");
+            sCheck = true;
+        } 
+
+        if(s == 1) sCheck = false;
+
+        textFont(font,height/12);
+        fill(0);
+        text(tt,width-height/4,height/12);
+        
+        if(tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n"){
+            image(weatherImage[2],width - height/4,height/6,height/8,height/8);
+        }else if(tw == "11d" || tw =="11n"){
+            image(weatherImage[3],width - height/4,height/6,height/8,height/8);
+        }else if(tw == "50d" || tw == "50n"){
+            image(weatherImage[0],width - height/5,height/7,height/8,height/8);
+        }else{
+            image(weatherImage[1],width - height/5,height/7,height/8,height/8);
+        }
+    }
+
+
+ public void setup() {
+  /* size commented out by preprocessor */;
+  JSONObject json = loadJSONObject(wurl);
+  println(json);
+  String t = json.getJSONArray("weather").getJSONObject(0).getString("icon");
+  println(t + " success?");
+}
 }
 PImage chopstick;
 float t = 0;
@@ -1028,7 +1108,7 @@ PImage balloon;
 }
 
 
-  public void settings() { size(displayWidth, displayHeight, P3D); }
+  public void settings() { size(800, 600, P3D); }
 
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Intergrated" };

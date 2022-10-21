@@ -6,6 +6,8 @@ class WeatherAPI {
     PImage weatherImage[] = new PImage[4]; // thanks for flaticon ()
     String tw;
     
+    PFont font;
+    
     // Time
     String turl = "http://worldtimeapi.org/api/timezone/Asia/Seoul";
     JSONObject tjson;
@@ -38,8 +40,8 @@ class WeatherAPI {
             tjson = loadJSONObject(turl);
             tt = tjson.getString("datetime");
             tt = tt.substring(tt.length() - 21, tt.length() - 16);
-            wjson = loadJSONObject(wurl);
-            tw = wjson.getJSONArray("weather").getJSONObject(0).getString("icon");
+            weatherInfo = loadJSONObject(wurl);
+            tw = weatherInfo.getJSONArray("weather").getJSONObject(0).getString("icon");
             sCheck = true;
         } 
 
@@ -59,13 +61,4 @@ class WeatherAPI {
             image(weatherImage[1],width - height/5,height/7,height/8,height/8);
         }
     }
-
-
-void setup() {
-  size(800, 600);
-  JSONObject json = loadJSONObject(wurl);
-  println(json);
-  String t = json.getJSONArray("weather").getJSONObject(0).getString("icon");
-  println(t + " success?");
-}
 }

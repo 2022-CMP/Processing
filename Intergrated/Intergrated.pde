@@ -1,5 +1,6 @@
 import java.util.*;
 
+PApplet myClass = this;
 
 // Stacking Tower of Babel
 boolean isTextureMode = false;
@@ -34,6 +35,9 @@ PImage background;
 
 // 22.10.21 : Music & Effets
 SoundManager soundManager;
+
+// 22.10.22 : WeatherAPI
+WeatherAPI weatherAPI;
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -76,6 +80,9 @@ void setup() {
 
     // 22.10.20 : Music & Effects
     soundManager = new SoundManager();
+    
+    // 22.10.21 : Weather API
+    weatherAPI = new WeatherAPI();
 }
 
 void draw () {
@@ -131,6 +138,9 @@ void draw () {
         startTime += EachLevelPeriod;
         slave.speed += 1;
     }
+    
+    // 22.10.21 : WeatherAPI
+    weatherAPI.run();
 }
 
 

@@ -12,7 +12,7 @@ class SoundManager {
     SoundManager () {
       // Please Put sounds to soundCollection
         for(String soundName : soundNames) {
-            soundCollection.put(soundName, new SoundFile(this, soundName));
+            soundCollection.put(soundName, new SoundFile(myClass, soundName));
         }
 
         // soundCollection.get("Song.mp3").loop(); (Background Music)
