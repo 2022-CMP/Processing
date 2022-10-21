@@ -56,8 +56,11 @@ PImage background;
 // 22.10.21 : Music & Effets
 SoundManager soundManager;
 
-// 22.10.22 : WeatherAPI
+// 22.10.21 : WeatherAPI
 WeatherAPI weatherAPI;
+
+// 22.10.21 : Button UI
+DemolishUI demolishUI;
 
  public void setup() {
     /* size commented out by preprocessor */;
@@ -103,6 +106,9 @@ WeatherAPI weatherAPI;
     
     // 22.10.21 : Weather API
     weatherAPI = new WeatherAPI();
+
+    // 22.10.21 : Demolish UI & Button
+    demolishUI = new DemolishUI(width/2, height/2);
 }
 
  public void draw () {
@@ -160,6 +166,9 @@ WeatherAPI weatherAPI;
     
     // 22.10.21 : WeatherAPI
     weatherAPI.run();
+
+    // 22.10.21 : Demolish UI
+    demolishUI.drawPanel();
 }
 
 
@@ -171,6 +180,11 @@ WeatherAPI weatherAPI;
 // Initial version of integration
  public void mousePressed () {
     
+    for (int i = 0 ; i < DemolishUI.buttonPanel.size() ; i++) {
+        DemolishUI.buttonPanel.get(i).buttonClicked(); // 여기부터 합시다!
+    }
+
+    /*
     // Checking highest stack block
     if (!tower.Tower.isEmpty()) {
         if (block != null && (punchAct || balloonAttached || chopstickAct)) {
@@ -189,18 +203,18 @@ WeatherAPI weatherAPI;
             fire.startOfFireParticle(new PVector(block.x, block.y));
         } else if (key == '3') {
             explosion = new ExplosionParticleSystem(new PVector(block.x, block.y));
-            explosion.stratOfExplosion();
+            explosion.startOfExplosion();
         } else if (key == '4') 
             punchAct = true;
         else if (key == '5')
             chopstickAct = true;
-        else if (key == '6') {
+        else if (balloonAct) {
             if (balloonAct && (mouseX > block.x - block.size*10&&mouseX < block.x + block.size*10 && mouseY < block.y && mouseY > block.y - block.size * block.blockHeight)) {
                 balloonAttached = true;
                 balloonAct = false;
             }
         }
-    } 
+    } */
 }
 
  public void keyPressed() {
@@ -300,6 +314,69 @@ class Block {
     endShape(CLOSE);
     
     return;
+  }
+
+   public PVector getBlockCenter() {
+    return new PVector(x, y);
+  }
+}
+class Button {
+  float x, y, size;
+  int buttonColor;
+  PImage img;
+  String str;
+
+  Button(float _x, float _y, PImage _img, String _str) {
+    x = _x; y = _y;
+    size = width / 384;
+    img = _img;
+    str = _str;
+  }
+
+   public void buttonClicked() {
+    if (isButtonClicked() && !tower.Tower.isEmpty()) {
+      // Get the block (Top of the Tower)
+      Block topBlock = tower.Tower.get(tower.Tower.size() - 1);
+      // When FIRE Button Clicked
+      if (str.equals("Fire")) {
+        fire.startOfFireParticle(topBlock.getBlockCenter());
+      }
+      // When BOMB Button Clicked
+      if (str.equals("Bomb")) {
+        explosion = new ExplosionParticleSystem(topBlock.getBlockCenter());
+        explosion.startOfExplosion();
+      }
+      // When LIGHTNING Button Clicked
+      // There are some PROBLEMS (CHANGING STROKE of UI)
+      if (str.equals("Lightning")) {
+        lightnings.ResetLightnings();
+      }
+      // When PUNCH Button Clicked
+      if (str.equals("Punch")) {
+        punchAct = true;
+      }
+      // When WIND Button Clicked
+      if (str.equals("Wind")) {
+        balloonAct = true;
+      }
+      // When CHOPSTICK Button Clicked
+      if (str.equals("ChopStick")) {
+        chopstickAct = true;
+      }
+      // DIDN'T add CHOPSTICK IMAGE for DEMOLISHING yet
+    }
+  }
+
+  /**
+    * NEW FUNCTION for BUTTON
+    * 
+    * returns TRUE of FALSE
+    * When Button Clicked, returns TRUE
+    * else, returns FALSE
+  **/
+   public boolean isButtonClicked() {
+    return (mouseX >= x - size * 15 && mouseX <= x + size * 15 &&
+            mouseY >= y - size * 15 && mouseY <= y + size * 15);
   }
 }
 class Character {
@@ -420,6 +497,56 @@ class Character {
     }
   }
 }
+class DemolishUI {
+  ArrayList<Button> buttonPanel = new ArrayList<>();
+  float x, y;
+  float startX;
+  float size = width / 384;
+
+  /**
+   * *  ORDER OF BUTTONS
+   * 1. FIRE
+   * 2. BOMB
+   * 3. LIGHTNING
+   * 4. PUNCH
+   * 5. WIND
+   * 6. CHOPSTICK
+   */
+  DemolishUI(float _x, float _y) {
+    x = _x - size * 80; y = _y - size * 90;
+    startX = x;
+
+    // DIRTY CODE... Will Fix it Later
+    buttonPanel.add(new Button(x, y, loadImage("fire.png"), "Fire"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("bomb.png"), "Bomb"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("lightning.png"), "Lightning"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("punch.png"), "Punch"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("wind.png"), "Wind"));
+    x += size * 30;
+    buttonPanel.add(new Button(x, y, loadImage("chopstickUI.png"), "Chopstick"));
+  }
+
+   public void drawPanel() {
+    rectMode(CENTER);
+    strokeWeight(4);
+    imageMode(CENTER);
+    for (int i = 0; i < buttonPanel.size(); i++, x += size * 30) {
+      fill(255);
+      stroke(0x00, 0x00, 0x00);
+      square(x, y, size * 30);
+      image(buttonPanel.get(i).img, x, y, size * 20, size * 20);
+    }
+    strokeWeight(0);
+    
+    x = startX;
+
+    rectMode(CORNER);
+  }
+}
 class ExplosionParticle {
   PVector position;
   PVector velocity;
@@ -528,7 +655,7 @@ class ExplosionParticleSystem {
     }
   }
 
-   public void stratOfExplosion () {
+   public void startOfExplosion () {
       if (endTime < millis()) {
         endTime = millis() + origianlDuringTime;
 

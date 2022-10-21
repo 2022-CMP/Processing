@@ -47,7 +47,7 @@ class ExplosionParticleSystem {
     }
   }
 
-  void stratOfExplosion () {
+  void startOfExplosion () {
       if (endTime < millis()) {
         endTime = millis() + origianlDuringTime;
 

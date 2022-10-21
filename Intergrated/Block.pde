@@ -92,4 +92,8 @@ class Block {
     
     return;
   }
+
+  PVector getBlockCenter() {
+    return new PVector(x, y);
+  }
 }

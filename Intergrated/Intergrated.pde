@@ -36,8 +36,11 @@ PImage background;
 // 22.10.21 : Music & Effets
 SoundManager soundManager;
 
-// 22.10.22 : WeatherAPI
+// 22.10.21 : WeatherAPI
 WeatherAPI weatherAPI;
+
+// 22.10.21 : Button UI
+DemolishUI demolishUI;
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -83,6 +86,9 @@ void setup() {
     
     // 22.10.21 : Weather API
     weatherAPI = new WeatherAPI();
+
+    // 22.10.21 : Demolish UI & Button
+    demolishUI = new DemolishUI(width/2, height/2);
 }
 
 void draw () {
@@ -140,6 +146,9 @@ void draw () {
     
     // 22.10.21 : WeatherAPI
     weatherAPI.run();
+
+    // 22.10.21 : Demolish UI
+    demolishUI.drawPanel();
 }
 
 
@@ -151,6 +160,11 @@ void BlockRemove () {
 // Initial version of integration
 void mousePressed () {
     
+    for (int i = 0 ; i < demolishUI.buttonPanel.size() ; i++) {
+        demolishUI.buttonPanel.get(i).buttonClicked(); // 여기부터 합시다!
+    }
+
+    /*
     // Checking highest stack block
     if (!tower.Tower.isEmpty()) {
         if (block != null && (punchAct || balloonAttached || chopstickAct)) {
@@ -169,18 +183,18 @@ void mousePressed () {
             fire.startOfFireParticle(new PVector(block.x, block.y));
         } else if (key == '3') {
             explosion = new ExplosionParticleSystem(new PVector(block.x, block.y));
-            explosion.stratOfExplosion();
+            explosion.startOfExplosion();
         } else if (key == '4') 
             punchAct = true;
         else if (key == '5')
             chopstickAct = true;
-        else if (key == '6') {
+        else if (balloonAct) {
             if (balloonAct && (mouseX > block.x - block.size*10&&mouseX < block.x + block.size*10 && mouseY < block.y && mouseY > block.y - block.size * block.blockHeight)) {
                 balloonAttached = true;
                 balloonAct = false;
             }
         }
-    } 
+    } */
 }
 
 void keyPressed() {
