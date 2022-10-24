@@ -12,9 +12,10 @@ class Button {
   }
 
   void buttonClicked() {
-    if (isButtonClicked() && !tower.Tower.isEmpty()) {
+    if (isButtonClicked() && !tower.Tower.isEmpty() && block != null) {
       // Get the block (Top of the Tower)
-      Block topBlock = tower.Tower.get(tower.Tower.size() - 1);
+      Block topBlock = block;
+
       // When FIRE Button Clicked
       if (str.equals("Fire")) {
         fire.startOfFireParticle(topBlock.getBlockCenter());
@@ -36,9 +37,11 @@ class Button {
       // When WIND Button Clicked
       if (str.equals("Wind")) {
         balloonAct = true;
+        tower.pushBlock(block);
+        block = null;
       }
       // When CHOPSTICK Button Clicked
-      if (str.equals("ChopStick")) {
+      if (str.equals("Chopstick")) {
         chopstickAct = true;
       }
       // DIDN'T add CHOPSTICK IMAGE for DEMOLISHING yet

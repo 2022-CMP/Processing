@@ -38,9 +38,11 @@ SoundManager soundManager;
 
 // 22.10.21 : WeatherAPI
 WeatherAPI weatherAPI;
+boolean isWeatherAPIExceptionOccur = false; // exception check
 
 // 22.10.21 : Button UI
 DemolishUI demolishUI;
+
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -85,8 +87,14 @@ void setup() {
     soundManager = new SoundManager();
     
     // 22.10.21 : Weather API
-    weatherAPI = new WeatherAPI();
-
+    try {
+        weatherAPI = new WeatherAPI();
+    }
+    catch (Exception e) {
+        println("WeatherAPI Exception Occur");
+        isWeatherAPIExceptionOccur = true;
+    }
+    
     // 22.10.21 : Demolish UI & Button
     demolishUI = new DemolishUI(width/2, height/2);
 }
@@ -126,6 +134,7 @@ void draw () {
     // Chopsticks
     if(chopstickAct == true){
         Chopstick(block);
+        println("Chopsticks");
     }
 
     // Wind
@@ -145,7 +154,8 @@ void draw () {
     }
     
     // 22.10.21 : WeatherAPI
-    weatherAPI.run();
+    if (!isWeatherAPIExceptionOccur)
+        weatherAPI.run();
 
     // 22.10.21 : Demolish UI
     demolishUI.drawPanel();
@@ -160,8 +170,33 @@ void BlockRemove () {
 // Initial version of integration
 void mousePressed () {
     
-    for (int i = 0 ; i < demolishUI.buttonPanel.size() ; i++) {
-        demolishUI.buttonPanel.get(i).buttonClicked(); // 여기부터 합시다!
+    if (!tower.Tower.isEmpty()) {
+        if (block != null && (punchAct || balloonAttached || chopstickAct)) {
+            punchAct = false;
+            balloonAttached = false;
+            chopstickAct = false;
+
+            BlockRemove();
+        }
+
+        block = tower.popBlock();
+
+        for (int i = 0 ; i < demolishUI.buttonPanel.size() ; i++) {
+            demolishUI.buttonPanel.get(i).buttonClicked(); 
+        }
+
+        if (balloonAct) {
+            if (balloonAct && (mouseX > tower.Tower.peek().x - tower.Tower.peek().size*10&&mouseX < tower.Tower.peek().x + tower.Tower.peek().size*10 
+                && mouseY < tower.Tower.peek().y && mouseY > tower.Tower.peek().y - tower.Tower.peek().size * tower.Tower.peek().blockHeight)) {
+                balloonAttached = true;
+                balloonAct = false;
+            } else {
+                if (block != null) {
+                    tower.pushBlock(block);
+                    block = null;
+                }
+            }
+        } 
     }
 
     /*

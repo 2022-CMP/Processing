@@ -28,7 +28,7 @@ class DemolishUI {
     x += size * 30;
     buttonPanel.add(new Button(x, y, loadImage("wind.png"), "Wind"));
     x += size * 30;
-    buttonPanel.add(new Button(x, y, loadImage("chopstickUI.png"), "Chopstick"));
+    buttonPanel.add(new Button(x, y, loadImage("chopstickUI.png"), "Chopstick")); 
   }
 
   void drawPanel() {

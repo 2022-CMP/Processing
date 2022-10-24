@@ -14,7 +14,7 @@ class WeatherAPI {
     String tt;
 
 
-    WeatherAPI () {
+    WeatherAPI () throws Exception {
         // Weather
         weatherInfo = loadJSONObject(wurl);
         font = createFont("h8514fix",height/12); // thanks for microsoft
@@ -35,6 +35,7 @@ class WeatherAPI {
     boolean sCheck = false;
 
     void run () {
+      /*
         s = second();
         if (s == 0 && sCheck == false) {
             tjson = loadJSONObject(turl);
@@ -44,6 +45,7 @@ class WeatherAPI {
             tw = weatherInfo.getJSONArray("weather").getJSONObject(0).getString("icon");
             sCheck = true;
         } 
+       */
 
         if(s == 1) sCheck = false;
 
