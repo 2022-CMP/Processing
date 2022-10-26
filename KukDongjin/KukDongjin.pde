@@ -4,6 +4,8 @@ boolean isTextureMode = false;
 Tower tower = new Tower();
 DemolishUI demolishUI;
 
+Main mainMenu;
+
 Character slave;
 
 FireParticleSystem fire;
@@ -18,6 +20,8 @@ void setup() {
   
   slave = new Character(2);
   demolishUI = new DemolishUI(width / 2, height / 2);
+
+  mainMenu = new Main();
 
   // This is for DEMOLISHING variables
   fire = new FireParticleSystem(0, new PVector(width/2, height/2));
@@ -37,6 +41,7 @@ void draw() {
   
   // Draw UI for DEMOLISHING
   demolishUI.drawPanel();
+  mainMenu.drawMain();
 
   // DEMOLISHING CLASS run
   fire.run();

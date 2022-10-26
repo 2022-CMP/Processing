@@ -4,11 +4,20 @@ class Button {
   PImage img;
   String str;
 
+  // Image Button
   Button(float _x, float _y, PImage _img, String _str) {
     x = _x; y = _y;
     size = width / 384;
     img = _img;
     str = _str;
+  }
+
+  // Text Button
+  Button(float _x, float _y, String _str) {
+    x = _x; y = _y;
+    size = width / 384;
+    str = _str;
+    textAlign(CENTER, CENTER);
   }
 
   void buttonClicked() {
