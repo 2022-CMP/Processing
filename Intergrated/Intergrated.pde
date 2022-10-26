@@ -97,6 +97,9 @@ void setup() {
     
     // 22.10.21 : Demolish UI & Button
     demolishUI = new DemolishUI(width/2, height/2);
+    
+    // 22.10.26 : plz finish sound
+    soundManager.BackgroundMusic("Background.wav");
 }
 
 void draw () {

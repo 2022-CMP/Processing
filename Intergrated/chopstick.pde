@@ -23,6 +23,7 @@ void Chopstick(Block block) {
     image(chopstick,block_.x*16/11,block_.y - block_.size*block.blockHeight*5/2,block_.size*block_.blockHeight*5, block_.size*block_.blockHeight*5);
     popMatrix();
   } else {
+    soundManager.SoundPlay("Chopsticks.wav");
     chopstickAct = false;
     BlockRemove();
     t = 0;
