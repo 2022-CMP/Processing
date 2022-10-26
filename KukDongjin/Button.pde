@@ -21,7 +21,7 @@ class Button {
   }
 
   void buttonClicked() {
-    if (isButtonClicked() && !tower.Tower.isEmpty()) {
+    if (isButtonClicked() && !tower.Tower.isEmpty() && currentPage == PageType.GAME) {
       // Get the block (Top of the Tower)
       Block topBlock = tower.Tower.get(tower.Tower.size() - 1);
       // When FIRE Button Clicked
@@ -51,6 +51,12 @@ class Button {
       //   something for chopstick
       // }
       // DIDN'T add CHOPSTICK IMAGE for DEMOLISHING yet
+    }
+    
+    if (isButtonClicked() && currentPage == PageType.MAINMENU) {
+      if (str.equals("Start")) {
+        currentPage = PageType.GAME;
+      }
     }
   }
 

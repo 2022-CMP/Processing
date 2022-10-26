@@ -16,6 +16,7 @@ class MainUI {
     mainButtonPanel.add(new Button(x, y, "Option"));
     y += size * 30;
     mainButtonPanel.add(new Button(x, y, "Credit"));
+    y = startY;
   }
 
   void drawPanel() {

@@ -6,6 +6,7 @@ class Main {
   }
 
   void drawMain() {
+    background(0xff, 0xff, 0xff);
     mainUI.drawPanel();
   }
 }

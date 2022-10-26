@@ -1,5 +1,7 @@
 import java.util.*;
 
+PageType currentPage; // Current Page
+
 boolean isTextureMode = false;
 Tower tower = new Tower();
 DemolishUI demolishUI;
@@ -30,37 +32,43 @@ void setup() {
   punchM = loadImage("pngaaa.com-76920.png");//thanks for pngaaa
   windowBreak = loadImage("pngwing.com.png");//thanks for pngwing
   balloon = loadImage("balloon.png");
+
+  currentPage = PageType.MAINMENU;
 }
 
 void draw() {
-  background(0xff, 0xff, 0xff);
-  
-  slave.drawBlock(tower);
-  tower.drawTower();  
-  slave.drawChar();
-  
-  // Draw UI for DEMOLISHING
-  demolishUI.drawPanel();
-  mainMenu.drawMain();
+  if (currentPage == PageType.MAINMENU) {
+    mainMenu.drawMain();
+  }
+  else if (currentPage == PageType.GAME) {
+    background(0xff, 0xff, 0xff);
+    
+    slave.drawBlock(tower);
+    tower.drawTower();  
+    slave.drawChar();
+    
+    // Draw UI for DEMOLISHING
+    demolishUI.drawPanel();
 
-  // DEMOLISHING CLASS run
-  fire.run();
-  explosion.run();
-  lightnings.Update();
+    // DEMOLISHING CLASS run
+    fire.run();
+    explosion.run();
+    lightnings.Update();
 
-  // if (punchAct) {
-  //   Punching(tempBlock);
+    // if (punchAct) {
+    //   Punching(tempBlock);
 
-  //   if (tempBlock != null) {
-  //     tempBlock.y -= 10;
-  //   }
-  // }
+    //   if (tempBlock != null) {
+    //     tempBlock.y -= 10;
+    //   }
+    // }
 
-  // if (balloonAttached) {
-  //   wind(tempBlock);
-  // } else if (balloonAct) {
-  //   beforeWind(tempBlock);
-  // }
+    // if (balloonAttached) {
+    //   wind(tempBlock);
+    // } else if (balloonAct) {
+    //   beforeWind(tempBlock);
+    // }
+  }
 }
 
 void keyPressed() {
@@ -72,6 +80,10 @@ void keyPressed() {
 void mousePressed() {
   for (int i = 0; i < demolishUI.buttonPanel.size(); i++) {
     demolishUI.buttonPanel.get(i).buttonClicked();
+  }
+
+  for (int i = 0; i < mainMenu.mainUI.mainButtonPanel.size(); i++) {
+    mainMenu.mainUI.mainButtonPanel.get(i).buttonClicked();
   }
 }
 
