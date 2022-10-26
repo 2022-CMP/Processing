@@ -5,7 +5,8 @@ class Button {
   String str;
 
   Button(float _x, float _y, PImage _img, String _str) {
-    x = _x; y = _y;
+    x = _x;
+    y = _y;
     size = width / 384;
     img = _img;
     str = _str;
@@ -53,14 +54,14 @@ class Button {
   }
 
   /**
-    * NEW FUNCTION for BUTTON
-    * 
-    * returns TRUE of FALSE
-    * When Button Clicked, returns TRUE
-    * else, returns FALSE
-  **/
+   * NEW FUNCTION for BUTTON
+   *
+   * returns TRUE of FALSE
+   * When Button Clicked, returns TRUE
+   * else, returns FALSE
+   **/
   boolean isButtonClicked() {
     return (mouseX >= x - size * 15 && mouseX <= x + size * 15 &&
-            mouseY >= y - size * 15 && mouseY <= y + size * 15);
+      mouseY >= y - size * 15 && mouseY <= y + size * 15);
   }
 }
