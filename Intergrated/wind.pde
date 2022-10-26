@@ -14,9 +14,10 @@ void wind(Block block) { // balloon attached and fly away
   block_.x += 3;
   block_.y -=3;
   block_.createBlock();
+  soundManager.SoundPlay("Wind.wav");
   pushMatrix();
   imageMode(CENTER);
-  image(balloon, block_.x, block_.y -block.blockHeight/2, block.size*block.blockHeight, block.size*block.blockHeight);
+  image(balloon, block_.x, block_.y -block.blockHeight*2-10, block.size*block.blockHeight, block.size*block.blockHeight);
   popMatrix();
   if (block_.y<0) {
     balloonAttached = false; // finish the function

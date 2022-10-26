@@ -97,6 +97,10 @@ void setup() {
     
     // 22.10.21 : Demolish UI & Button
     demolishUI = new DemolishUI(width/2, height/2);
+    
+    // 22.10.26 : plz finish sound
+    soundManager.SoundAmp("Background.wav",0.3);
+    soundManager.BackgroundMusic("Background.wav");
 }
 
 void draw () {
@@ -159,6 +163,8 @@ void draw () {
 
     // 22.10.21 : Demolish UI
     demolishUI.drawPanel();
+    // 22.10.26 : time Checking
+    //println(weatherAPI.timeChecker);
 }
 
 

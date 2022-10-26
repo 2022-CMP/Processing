@@ -4,8 +4,8 @@ class SoundManager {
   // By using HashMap, How about soundFile call by that String?
 
   HashMap<String, SoundFile> soundCollection = new HashMap<String, SoundFile>();
-  String[] soundNames = {"Background.wav", "Bomb.wav", "Chopsticks.wav",
-    "Fire.wav", "Punch.wav", "Thunder.wav", "Wind.wav"
+  String[] soundNames = {"Soundsample.mp3", "Background.wav", "Boom.mp3" ,
+  "Chopsticks.mp3", "Fire.wav", "Punch.wav", "Thunder.wav", "Wind.mp3"
   };
 
   SoundManager () {
@@ -22,8 +22,5 @@ class SoundManager {
   }
   void BackgroundMusic (String background) {
     soundCollection.get(background).loop();
-  }
-  void SoundAmp(String soundName, float soundAmp) {
-    soundCollection.get(soundName).amp(soundAmp);
   }
 }
