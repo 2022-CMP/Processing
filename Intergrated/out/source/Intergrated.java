@@ -148,14 +148,15 @@ Credit credit;
         credit.drawCredit();
     }
 
-    if (tw != null) {
-        if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") {
+    String tw = weatherAPI.tw;
+    if ( tw != null) {
+        if (weatherAPI.weatherChecker == "rain") {
             windWeight = 10;
         // image(weatherImage[2], width - height/4, height/6, height/8, height/8);
-        } else if (tw == "11d" || tw =="11n") {
+        } else if (weatherAPI.weatherChecker == "thunder") {
             lightnings.lightningsNumber = 20; 
         // image(weatherImage[3], width - height/4, height/6, height/8, height/8);
-        } else if (tw == "50d" || tw == "50n") {
+        } else if (weatherAPI.weatherChecker == "snow"||weatherAPI.weatherChecker == "rain") {
             fire.fireNumber = 1;
         // image(weatherImage[0], width - height/5, height/7, height/8, height/8);
         } else {
@@ -309,11 +310,6 @@ Credit credit;
             }
         }
     } */
-}
-
- public void keyPressed() {
-    if (key == '6')
-        balloonAct =true;
 }
 class BackButton {
   Button back;
@@ -512,7 +508,9 @@ class Button {
       }
       // When CHOPSTICK Button Clicked
       if (str.equals("Chopstick")) {
-        chopstickAct = true;
+        String times = weatherAPI.timeChecker;
+        if (times == "08"||times == "09"||times == "12"||times == "13"||times == "18"||times == "19")
+          chopstickAct = true;
       }
     }
   }
@@ -1361,7 +1359,8 @@ class WeatherAPI {
   JSONObject weatherInfo;
   PImage weatherImage[] = new PImage[4]; // thanks for flaticon ()
   String tw;
-  //String timeChecker; 
+  String timeChecker; 
+  String weatherChecker;
   PFont font;
 
   // Time
@@ -1384,7 +1383,7 @@ class WeatherAPI {
     tjson = loadJSONObject(turl);
     tt = tjson.getString("datetime");
     tt = tt.substring(tt.length() - 21, tt.length() - 16);
-    //timeChecker = tt.substring(tt.length() - 5, tt.length()-3);
+    timeChecker = tt.substring(tt.length() - 5, tt.length()-3);
   }
 
 
@@ -1401,6 +1400,7 @@ class WeatherAPI {
      weatherInfo = loadJSONObject(wurl);
      tw = weatherInfo.getJSONArray("weather").getJSONObject(0).getString("icon");
      sCheck = true;
+     timeChecker = tt.substring(tt.length() - 5, tt.length()-3);
      }
      */
 
@@ -1408,16 +1408,20 @@ class WeatherAPI {
 
     textFont(font, height/12);
     fill(0);
-    text(tt, width-height/4, height/12);
+    text(tt, width-height/4, height/25);
 
     if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") {
       image(weatherImage[2], width - height/4, height/6, height/8, height/8);
+      weatherChecker = "rain";
     } else if (tw == "11d" || tw =="11n") {
       image(weatherImage[3], width - height/4, height/6, height/8, height/8);
+      weatherChecker = "thunder";
     } else if (tw == "50d" || tw == "50n") {
       image(weatherImage[0], width - height/5, height/7, height/8, height/8);
+      weatherChecker = "snow";
     } else {
       image(weatherImage[1], width - height/5, height/7, height/8, height/8);
+      weatherChecker = "sun";
     }
   }
 }

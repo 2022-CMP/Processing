@@ -291,8 +291,3 @@ void mousePressed () {
         }
     } */
 }
-
-void keyPressed() {
-    if (key == '6')
-        balloonAct =true;
-}

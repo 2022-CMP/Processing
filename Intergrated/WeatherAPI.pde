@@ -54,7 +54,7 @@ class WeatherAPI {
 
     textFont(font, height/12);
     fill(0);
-    text(tt, width-height/4, height/12);
+    text(tt, width-height/4, height/25);
 
     if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") {
       image(weatherImage[2], width - height/4, height/6, height/8, height/8);
