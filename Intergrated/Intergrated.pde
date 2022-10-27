@@ -174,9 +174,6 @@ void draw () {
             beforeWind(block);
         }
 
-        // 22.10.18 : Game Over
-        gameOver.run();
-
         // 22.10.19 : Change the Difficulty
         if (millis() - startTime > EachLevelPeriod)  {
             startTime += EachLevelPeriod;
@@ -192,6 +189,10 @@ void draw () {
         // 22.10.26 : time Checking
         //println(weatherAPI.timeChecker);
     }
+
+        // 22.10.18 : Game Over
+        gameOver.run();
+
 }
 
 

@@ -19,10 +19,11 @@ class GameOver {
 
     void run () {
         if (firstStart) {
-            firstStart = false;
-
-            lineHeight = tower.Tower.peek().blockHeight;
-            font1 = createFont("Arial", 16);
+            if (!tower.Tower.isEmpty()) {
+                firstStart = false;
+                lineHeight = tower.Tower.peek().blockHeight;
+                font1 = createFont("Arial", 16);
+            }
         }
 
         GameOverCheck();
@@ -36,9 +37,11 @@ class GameOver {
         background(0xff, 0xff, 0xff);
 
         pushMatrix();
+
+        fill(0);
         
         translate(width/2, height/2, 0);
-        textFont(font1, height/20);
+        textFont(font1, height/16);
         textAlign(CENTER);
         text(gameOverMessage, 0, 0);
 
