@@ -4,11 +4,20 @@ class Button {
   PImage img;
   String str;
 
+  // IMAGE BUTTON
   Button(float _x, float _y, PImage _img, String _str) {
     x = _x;
     y = _y;
     size = width / 384;
     img = _img;
+    str = _str;
+  }
+
+  // TEXT BUTTON
+  Button(float _x, float _y, String _str) {
+    x = _x;
+    y = _y;
+    size = width / 384;
     str = _str;
   }
 
@@ -49,7 +58,12 @@ class Button {
       if (str.equals("Chopstick")) {
         chopstickAct = true;
       }
-      // DIDN'T add CHOPSTICK IMAGE for DEMOLISHING yet
+    }
+
+    if (isButtonClicked() && currentPage == Page.MAIN) {
+      if (str.equals("Start")) {
+        currentPage = Page.GAME;
+      }
     }
   }
 

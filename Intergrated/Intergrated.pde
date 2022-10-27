@@ -43,6 +43,12 @@ boolean isWeatherAPIExceptionOccur = false; // exception check
 // 22.10.21 : Button UI
 DemolishUI demolishUI;
 
+// 22.10.27 : Main Page
+Main main;
+
+// 22.10.27 : Page Status
+Page currentPage = Page.MAIN;
+
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -101,70 +107,81 @@ void setup() {
     // 22.10.26 : plz finish sound
     soundManager.SoundAmp("Background.wav",0.3);
     soundManager.BackgroundMusic("Background.wav");
+
+    // 22.10.27 : Main Page
+    main = new Main();
 }
 
 void draw () {
-    background(0xff, 0xff, 0xff);
-    imageMode(CORNER);
-    image(background, 0, 0, width, height);
-    
-    // Stacking Tower
-    if (block != null) {
-      block.createBlock();
-      println(block.x + "    " + block.y);
+    // Main Page
+    if (currentPage == Page.MAIN) {
+        main.drawMain();
     }
 
-    slave.drawBlock(tower);
-    tower.drawTower();
-    slave.drawChar();
-    
-    
-    // Demolising Powers 1
-    lightnings.Update();
-    fire.run();
-    explosion.run();
+    // Game Page
+    if (currentPage == Page.GAME) {
+        background(0xff, 0xff, 0xff);
+        imageMode(CORNER);
+        image(background, 0, 0, width, height);
+        
+        // Stacking Tower
+        if (block != null) {
+        block.createBlock();
+        println(block.x + "    " + block.y);
+        }
+
+        slave.drawBlock(tower);
+        tower.drawTower();
+        slave.drawChar();
+        
+        
+        // Demolising Powers 1
+        lightnings.Update();
+        fire.run();
+        explosion.run();
 
 
-    // Demolising Powers 2
+        // Demolising Powers 2
 
-    // Punch
-    if (punchAct == true) {//function start
-        Punching(block);
+        // Punch
+        if (punchAct == true) {//function start
+            Punching(block);
 
-        if (block != null)
-            block.y -=10;
+            if (block != null)
+                block.y -=10;
+        }
+
+        // Chopsticks
+        if(chopstickAct == true){
+            Chopstick(block);
+            println("Chopsticks");
+        }
+
+        // Wind
+        if (balloonAttached == true) {//check to activate function
+            wind(block);
+        } else if(balloonAct == true) {//check  
+            beforeWind(block);
+        }
+
+        // 22.10.18 : Game Over
+        gameOver.run();
+
+        // 22.10.19 : Change the Difficulty
+        if (millis() - startTime > EachLevelPeriod)  {
+            startTime += EachLevelPeriod;
+            slave.speed += 1;
+        }
+        
+        // 22.10.21 : WeatherAPI
+        if (!isWeatherAPIExceptionOccur)
+            weatherAPI.run();
+
+        // 22.10.21 : Demolish UI
+        demolishUI.drawPanel();
+        // 22.10.26 : time Checking
+        //println(weatherAPI.timeChecker);
     }
-
-    // Chopsticks
-    if(chopstickAct == true){
-        Chopstick(block);
-        println("Chopsticks");
-    }
-
-    // Wind
-    if (balloonAttached == true) {//check to activate function
-        wind(block);
-    } else if(balloonAct == true) {//check  
-        beforeWind(block);
-    }
-
-    // 22.10.18 : Game Over
-    gameOver.run();
-
-    // 22.10.19 : Change the Difficulty
-    if (millis() - startTime > EachLevelPeriod)  {
-        startTime += EachLevelPeriod;
-        slave.speed += 1;
-    }
-    
-    // 22.10.21 : WeatherAPI
-    if (!isWeatherAPIExceptionOccur)
-        weatherAPI.run();
-
-    // 22.10.21 : Demolish UI
-    demolishUI.drawPanel();
-    // 22.10.26 : time Checking
-    //println(weatherAPI.timeChecker);
 }
 
 
@@ -203,6 +220,11 @@ void mousePressed () {
                 }
             }
         } 
+    }
+
+    // Button in Main Screen
+    for (int i = 0; i < main.mainButtonUI.mainButtonPanel.size(); i++) {
+        main.mainButtonUI.mainButtonPanel.get(i).buttonClicked();
     }
 
     /*
