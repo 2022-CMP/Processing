@@ -1,4 +1,6 @@
 PImage balloon;
+float windWeight = 3;
+
 void beforeWind(Block block) { // if balloon function start balloon follow mouse
   pushMatrix();
   imageMode(CENTER);
@@ -11,8 +13,8 @@ void beforeWind(Block block) { // if balloon function start balloon follow mouse
 
 void wind(Block block) { // balloon attached and fly away
   Block block_ = block;
-  block_.x += 3;
-  block_.y -=3;
+  block_.x += windWeight;
+  block_.y -= windWeight;
   block_.createBlock();
   soundManager.SoundPlay("Wind.wav");
   pushMatrix();

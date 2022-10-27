@@ -1,6 +1,7 @@
 class NewLightnings {
     ArrayList<NewLightning> lightnings = new ArrayList<NewLightning>(); 
     boolean firstOccur = false;
+    int lightningsNumber = 7;
 
     // Check Running
     boolean isRunning = false;
@@ -8,7 +9,7 @@ class NewLightnings {
     void Update () {
         if(firstOccur) {
             firstOccur = false;
-            for (int i = 0 ; i < 7 ; i++)
+            for (int i = 0 ; i < lightningsNumber ; i++)
                 lightnings.add(new NewLightning(new PVector(random(0, width), 0), 0, 7));
 
             isRunning = true;

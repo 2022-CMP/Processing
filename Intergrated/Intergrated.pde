@@ -128,6 +128,23 @@ void draw () {
         credit.drawCredit();
     }
 
+    String tw = weatherAPI.tw;
+    if ( tw != null) {
+        if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") {
+            windWeight = 10;
+        // image(weatherImage[2], width - height/4, height/6, height/8, height/8);
+        } else if (tw == "11d" || tw =="11n") {
+            lightnings.lightningsNumber = 20; 
+        // image(weatherImage[3], width - height/4, height/6, height/8, height/8);
+        } else if (tw == "50d" || tw == "50n") {
+            fire.fireNumber = 1;
+        // image(weatherImage[0], width - height/5, height/7, height/8, height/8);
+        } else {
+            fire.fireNumber = 3;
+        // image(weatherImage[1], width - height/5, height/7, height/8, height/8);
+        }
+    }
+
     // Game Page
     if (currentPage == Page.GAME) {
         background(0xff, 0xff, 0xff);

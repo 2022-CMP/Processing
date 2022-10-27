@@ -148,6 +148,22 @@ Credit credit;
         credit.drawCredit();
     }
 
+    if (tw != null) {
+        if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") {
+            windWeight = 10;
+        // image(weatherImage[2], width - height/4, height/6, height/8, height/8);
+        } else if (tw == "11d" || tw =="11n") {
+            lightnings.lightningsNumber = 20; 
+        // image(weatherImage[3], width - height/4, height/6, height/8, height/8);
+        } else if (tw == "50d" || tw == "50n") {
+            fire.fireNumber = 1;
+        // image(weatherImage[0], width - height/5, height/7, height/8, height/8);
+        } else {
+            fire.fireNumber = 3;
+        // image(weatherImage[1], width - height/5, height/7, height/8, height/8);
+        }
+    }
+
     // Game Page
     if (currentPage == Page.GAME) {
         background(0xff, 0xff, 0xff);
@@ -974,6 +990,8 @@ class FireParticleSystem {
         isRunning = false;
     }
 
+    int fireNumber = 2;
+
     // play all particles
      public void run() {
         elapsedTime = millis();
@@ -988,7 +1006,7 @@ class FireParticleSystem {
         }
 
         if (elapsedTime < endTime) {
-            for (int i = 0 ; i < 2 ; i++)
+            for (int i = 0 ; i < fireNumber ; i++)
                 addParticle();
         } else if (isRunning) {
             isRunning = false;
@@ -1230,6 +1248,7 @@ class NewLightning {
 class NewLightnings {
     ArrayList<NewLightning> lightnings = new ArrayList<NewLightning>(); 
     boolean firstOccur = false;
+    int lightningsNumber = 7;
 
     // Check Running
     boolean isRunning = false;
@@ -1237,7 +1256,7 @@ class NewLightnings {
      public void Update () {
         if(firstOccur) {
             firstOccur = false;
-            for (int i = 0 ; i < 7 ; i++)
+            for (int i = 0 ; i < lightningsNumber ; i++)
                 lightnings.add(new NewLightning(new PVector(random(0, width), 0), 0, 7));
 
             isRunning = true;
@@ -1463,6 +1482,8 @@ PImage punchM;
   }
 }
 PImage balloon;
+float windWeight = 3;
+
  public void beforeWind(Block block) { // if balloon function start balloon follow mouse
   pushMatrix();
   imageMode(CENTER);
@@ -1475,8 +1496,8 @@ PImage balloon;
 
  public void wind(Block block) { // balloon attached and fly away
   Block block_ = block;
-  block_.x += 3;
-  block_.y -=3;
+  block_.x += windWeight;
+  block_.y -= windWeight;
   block_.createBlock();
   soundManager.SoundPlay("Wind.wav");
   pushMatrix();
