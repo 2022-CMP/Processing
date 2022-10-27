@@ -1,4 +1,6 @@
 enum Page {
   MAIN,
-  GAME
+  GAME,
+  OPTION,
+  CREDIT
 }

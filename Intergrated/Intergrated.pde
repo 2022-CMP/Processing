@@ -226,6 +226,7 @@ void mousePressed () {
     for (int i = 0; i < main.mainButtonUI.mainButtonPanel.size(); i++) {
         main.mainButtonUI.mainButtonPanel.get(i).buttonClicked();
     }
+    main.exitButton.exit.buttonClicked();
 
     /*
     // Checking highest stack block

@@ -22,6 +22,19 @@ class Button {
   }
 
   void buttonClicked() {
+
+    // MAIN PAGE BUTTONS
+    if (isButtonClicked() && currentPage == Page.MAIN) {
+      if (str.equals("Start")) {
+        currentPage = Page.GAME;
+      }
+
+      if (str.equals("X")) {
+        exit();
+      }
+    }
+
+    // GAME PAGE BUTTONS
     if (isButtonClicked() && !tower.Tower.isEmpty() && block != null) {
       // Get the block (Top of the Tower)
       Block topBlock = block;
@@ -57,12 +70,6 @@ class Button {
       // When CHOPSTICK Button Clicked
       if (str.equals("Chopstick")) {
         chopstickAct = true;
-      }
-    }
-
-    if (isButtonClicked() && currentPage == Page.MAIN) {
-      if (str.equals("Start")) {
-        currentPage = Page.GAME;
       }
     }
   }
