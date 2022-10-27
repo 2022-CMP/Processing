@@ -2,7 +2,7 @@ class Credit {
   float x, y;
   float size = width / 384;
 
-  String info = "MADE BY\n\n\nKim Hwi-Nyeon\nSim Ki-Ho\nKuk Dong-Jin\n";
+  String info = "MADE BY\n\n\nKim Hwi-Nyeon\nShim Gi-Ho\nKuk Dong-Jin\n";
   PFont font = createFont("Georgia", size * 10);
 
   BackButton backButton;
