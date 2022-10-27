@@ -130,13 +130,13 @@ void draw () {
 
     String tw = weatherAPI.tw;
     if ( tw != null) {
-        if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") {
+        if (weatherAPI.weatherChecker == "rain") {
             windWeight = 10;
         // image(weatherImage[2], width - height/4, height/6, height/8, height/8);
-        } else if (tw == "11d" || tw =="11n") {
+        } else if (weatherAPI.weatherChecker == "thunder") {
             lightnings.lightningsNumber = 20; 
         // image(weatherImage[3], width - height/4, height/6, height/8, height/8);
-        } else if (tw == "50d" || tw == "50n") {
+        } else if (weatherAPI.weatherChecker == "snow"||weatherAPI.weatherChecker == "rain") {
             fire.fireNumber = 1;
         // image(weatherImage[0], width - height/5, height/7, height/8, height/8);
         } else {
