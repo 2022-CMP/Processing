@@ -49,6 +49,9 @@ Main main;
 // 22.10.27 : Page Status
 Page currentPage = Page.MAIN;
 
+// 22.10.27 : Credit
+Credit credit;
+
 
 void setup() {
     size(displayWidth, displayHeight, P3D);
@@ -110,12 +113,19 @@ void setup() {
 
     // 22.10.27 : Main Page
     main = new Main();
+
+    // 22.10.27 : Credit
+    credit = new Credit();
 }
 
 void draw () {
     // Main Page
     if (currentPage == Page.MAIN) {
         main.drawMain();
+    }
+
+    if (currentPage == Page.CREDIT) {
+        credit.drawCredit();
     }
 
     // Game Page
@@ -227,6 +237,9 @@ void mousePressed () {
         main.mainButtonUI.mainButtonPanel.get(i).buttonClicked();
     }
     main.exitButton.exit.buttonClicked();
+
+    // Button in Credit
+    credit.backButton.back.buttonClicked();
 
     /*
     // Checking highest stack block

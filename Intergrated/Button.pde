@@ -32,6 +32,17 @@ class Button {
       if (str.equals("X")) {
         exit();
       }
+
+      if (str.equals("Credit")) {
+        currentPage = Page.CREDIT;
+      }
+    }
+
+    // CREDIT PAGE BUTTON
+    if (isButtonClicked() && currentPage == Page.CREDIT) {
+      if (str.equals("Back")) {
+        currentPage = Page.MAIN;
+      }
     }
 
     // GAME PAGE BUTTONS
