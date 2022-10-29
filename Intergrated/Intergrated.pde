@@ -130,17 +130,17 @@ void draw () {
 
     String tw = weatherAPI.tw;
     if ( tw != null) {
-        if (weatherAPI.weatherChecker == "rain") {
+        if (weatherAPI.weatherChecker == "rain") { // rainy day, enforce the wind
             windWeight = 10;
         // image(weatherImage[2], width - height/4, height/6, height/8, height/8);
-        } else if (weatherAPI.weatherChecker == "thunder") {
+        } else if (weatherAPI.weatherChecker == "thunder") { // thunder day , enforce the thunder
             lightnings.lightningsNumber = 20; 
         // image(weatherImage[3], width - height/4, height/6, height/8, height/8);
         } else if (weatherAPI.weatherChecker == "snow"||weatherAPI.weatherChecker == "rain") {
-            fire.fireNumber = 1;
+            fire.fireNumber = 1;// weak the fire if weather is snow and rain
         // image(weatherImage[0], width - height/5, height/7, height/8, height/8);
         } else {
-            fire.fireNumber = 3;
+            fire.fireNumber = 3; // sunny day enforce the fire
         // image(weatherImage[1], width - height/5, height/7, height/8, height/8);
         }
     }
