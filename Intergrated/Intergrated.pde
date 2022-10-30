@@ -207,7 +207,7 @@ void draw () {
         //println(weatherAPI.timeChecker);
     }
 
-        // 22.10.18 : Game Over
+        // 22.10.18 : Game Over Checking and GameOver
         gameOver.run();
 
 }
