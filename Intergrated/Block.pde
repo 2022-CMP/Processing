@@ -38,7 +38,7 @@ class Block {
     x = x + size * 80;
     y = y + size * 60;
   }
-
+//draw block to the scene.
   void createBlock() {
     
     pushMatrix();
@@ -92,7 +92,7 @@ class Block {
     
     return;
   }
-
+//for using center of block
   PVector getBlockCenter() {
     return new PVector(x, y);
   }

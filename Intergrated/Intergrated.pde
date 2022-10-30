@@ -219,6 +219,7 @@ void BlockRemove () {
 
 
 // Initial version of integration
+// to using demolishing UI for demolishing function and class
 void mousePressed () {
     
     if (!tower.Tower.isEmpty()) {

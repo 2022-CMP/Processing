@@ -1,7 +1,8 @@
 class Character {
   // PNGs for Character
-  ArrayList<PImage> slave = new ArrayList<>();
-  ArrayList<PImage> slaveInvert = new ArrayList<>();
+  // using sprite to show character looks like moving
+  ArrayList<PImage> slave = new ArrayList<>();  // normal(----->)
+  ArrayList<PImage> slaveInvert = new ArrayList<>(); // character move backward(<------)
   PImage currentSprite;
 
   // For Character Location
@@ -65,7 +66,7 @@ class Character {
     popMatrix();
   }
 
-  void moveChar() {
+  void moveChar() { //character move left right 
     if (isLeft) {
       x -= blockLoc.size * speed;
     }
@@ -81,7 +82,7 @@ class Character {
     }
   }
 
-  void changeChar() {
+  void changeChar() { //Change character image during move, turn ...
     // When the char turns
     if (isLeft) {
       currentSprite = slave.get(i);

@@ -10,7 +10,7 @@ class GameOver {
     float lineHeight;
     
 
-    void GameOverCheck () {
+    void GameOverCheck () {//if tower is upper than deadLine go to game over
         if (!tower.Tower.isEmpty()) {
             if (tower.Tower.peek().y < tower.Tower.peek().blockHeight * 2)
                 IsGameOver = true;
@@ -48,7 +48,7 @@ class GameOver {
         popMatrix();
     }
 
-    void GameOverLineDraw () {
+    void GameOverLineDraw () { // it show red line upside of window
         stroke(255, 0, 0);
         fill(255, 0, 0);
         rect(0, lineHeight, width, 10);

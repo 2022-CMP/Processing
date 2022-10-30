@@ -1,7 +1,7 @@
-class NewLightnings {
+class NewLightnings { // for drawing many lightning when the lightning button clicked
     ArrayList<NewLightning> lightnings = new ArrayList<NewLightning>(); 
     boolean firstOccur = false;
-    int lightningsNumber = 7;
+    int lightningsNumber = 7; // how many lightning will be shown ..
 
     // Check Running
     boolean isRunning = false;
