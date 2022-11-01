@@ -10,8 +10,13 @@ class GameOver {
     float lineHeight;
     
 
+<<<<<<< HEAD
     void GameOverCheck () {
         if (!tower.Tower.isEmpty() && !IsGameOver) {
+=======
+    void GameOverCheck () {//if tower is upper than deadLine go to game over
+        if (!tower.Tower.isEmpty()) {
+>>>>>>> 465b01a38452f75e966577270814d328d70a2559
             if (tower.Tower.peek().y < tower.Tower.peek().blockHeight * 2)
                 IsGameOver = true;
         }
@@ -20,10 +25,11 @@ class GameOver {
     void run () {
 
         if (firstStart) {
-            firstStart = false;
-
-            lineHeight = tower.Tower.peek().blockHeight;
-            font1 = createFont("Arial", 16);
+            if (!tower.Tower.isEmpty()) {
+                firstStart = false;
+                lineHeight = tower.Tower.peek().blockHeight;
+                font1 = createFont("Arial", 16);
+            }
         }
 
         GameOverCheck();
@@ -39,17 +45,24 @@ class GameOver {
         currentPage = Page.GAME_OVER;
 
         pushMatrix();
+
+        fill(0);
         
         fill(0xff, 0x00, 0x00);
         translate(width/2, height/2, 0);
+<<<<<<< HEAD
         textFont(font1, 50);
         textAlign(CENTER, CENTER);
+=======
+        textFont(font1, height/16);
+        textAlign(CENTER);
+>>>>>>> 465b01a38452f75e966577270814d328d70a2559
         text(gameOverMessage, 0, 0);
 
         popMatrix();
     }
 
-    void GameOverLineDraw () {
+    void GameOverLineDraw () { // it show red line upside of window
         stroke(255, 0, 0);
         fill(255, 0, 0);
         rect(0, lineHeight, width, 10);

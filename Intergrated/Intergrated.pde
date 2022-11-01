@@ -292,6 +292,7 @@ void mousePressed () {
         }
     } */
 }
+<<<<<<< HEAD
 
 void keyPressed() {
     if (currentPage == Page.GAME_OVER) {
@@ -299,4 +300,5 @@ void keyPressed() {
         gameOver.IsGameOver = false;
     }
 }
-
+=======
+>>>>>>> 465b01a38452f75e966577270814d328d70a2559
