@@ -24,7 +24,6 @@ class MainButtonUI {
       rectMode(CENTER);
       noFill();
       stroke(0x00, 0x00, 0x00);
-      strokeWeight(3);
       rect(x, y, size * 40, size * 15);
       fill(0x00, 0x00, 0x00);
       textFont(font, size * 10);

@@ -275,8 +275,6 @@ void mousePressed () {
 }
 
 void keyPressed() {
-    if (currentPage == Page.GAME_OVER) {
-        currentPage = Page.MAIN;
-        gameOver.IsGameOver = false;
-    }
+    if (key == '6')
+        balloonAct =true;
 }

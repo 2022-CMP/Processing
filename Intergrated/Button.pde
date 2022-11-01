@@ -27,8 +27,6 @@ class Button {
     if (isButtonClicked() && currentPage == Page.MAIN) {
       if (str.equals("Start")) {
         currentPage = Page.GAME;
-        tower = new Tower();
-        slave.speed = 2;
       }
 
       if (str.equals("X")) {
