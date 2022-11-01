@@ -46,23 +46,25 @@ class Character {
   }
 
   void drawChar() {
-    pushMatrix();
-    
-    translate(x, y);
-    imageMode(CENTER);
-    
-    changeChar();
+    if (currentPage == Page.GAME) {
+      pushMatrix();
+      
+      translate(x, y);
+      imageMode(CENTER);
+      
+      changeChar();
 
-    if (isLeft) {
-      image(currentSprite, 0, 0);
-    }
-    else {
-      image(currentSprite, 0, 0);
-    }
+      if (isLeft) {
+        image(currentSprite, 0, 0);
+      }
+      else {
+        image(currentSprite, 0, 0);
+      }
 
-    moveChar();
-    
-    popMatrix();
+      moveChar();
+      
+      popMatrix();
+    }
   }
 
   void moveChar() {

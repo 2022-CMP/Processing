@@ -2,5 +2,6 @@ enum Page {
   MAIN,
   GAME,
   OPTION,
-  CREDIT
+  CREDIT,
+  GAME_OVER,
 }

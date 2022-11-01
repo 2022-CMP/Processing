@@ -5,12 +5,14 @@ class Tower {
   Tower() {};
 
   void drawTower() {
-    for (int i = 0; i < Tower.size(); i++) {
-      if (Tower.get(i).isTextureMode) {
-        Tower.get(i).drawTextureBlock();
-      }
-      else {
-        Tower.get(i).drawColorBlock();
+    if (!Tower.isEmpty()) {
+      for (int i = 0; i < Tower.size(); i++) {
+        if (Tower.get(i).isTextureMode) {
+          Tower.get(i).drawTextureBlock();
+        }
+        else {
+          Tower.get(i).drawColorBlock();
+        }
       }
     }
 

@@ -6,12 +6,12 @@ class GameOver {
     boolean firstStart = true;
     // Font
     PFont font1;
-    String gameOverMessage = "Game Over!";
+    String gameOverMessage = "Game Over!\nPress any key to go back to the main menu.";
     float lineHeight;
     
 
     void GameOverCheck () {
-        if (!tower.Tower.isEmpty()) {
+        if (!tower.Tower.isEmpty() && !IsGameOver) {
             if (tower.Tower.peek().y < tower.Tower.peek().blockHeight * 2)
                 IsGameOver = true;
         }
@@ -35,11 +35,14 @@ class GameOver {
     void GameOverDraw () {
         background(0xff, 0xff, 0xff);
 
+        currentPage = Page.GAME_OVER;
+
         pushMatrix();
         
+        fill(0xff, 0x00, 0x00);
         translate(width/2, height/2, 0);
-        textFont(font1, height/20);
-        textAlign(CENTER);
+        textFont(font1, height / 20);
+        textAlign(CENTER, CENTER);
         text(gameOverMessage, 0, 0);
 
         popMatrix();
