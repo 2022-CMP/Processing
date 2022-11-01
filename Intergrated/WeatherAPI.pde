@@ -5,8 +5,9 @@ class WeatherAPI {
   JSONObject weatherInfo;
   PImage weatherImage[] = new PImage[4]; // thanks for flaticon ()
   String tw;
-  //String timeChecker; 
-  PFont font;
+  String timeChecker; //easy to checking time(hour) to chopstick condition
+  String weatherChecker; // easy to checking weather to demolishing things condition
+  PFont font; // time font 
 
   // Time
   String turl = "http://worldtimeapi.org/api/timezone/Asia/Seoul";
@@ -27,8 +28,8 @@ class WeatherAPI {
     // Time
     tjson = loadJSONObject(turl);
     tt = tjson.getString("datetime");
-    tt = tt.substring(tt.length() - 21, tt.length() - 16);
-    //timeChecker = tt.substring(tt.length() - 5, tt.length()-3);
+    tt = tt.substring(tt.length() - 21, tt.length() - 16); // showing  HH:MM
+    timeChecker = tt.substring(tt.length() - 5, tt.length()-3); // only HH
   }
 
 
@@ -45,6 +46,7 @@ class WeatherAPI {
      weatherInfo = loadJSONObject(wurl);
      tw = weatherInfo.getJSONArray("weather").getJSONObject(0).getString("icon");
      sCheck = true;
+     timeChecker = tt.substring(tt.length() - 5, tt.length()-3);
      }
      */
 
@@ -52,16 +54,20 @@ class WeatherAPI {
 
     textFont(font, height/12);
     fill(0);
-    text(tt, width-height/4, height/12);
+    text(tt, width-height/4, height/25);
 
-    if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") {
+    if (tw =="09d" || tw == "09n" || tw == "10d" || tw == "10n") { // rain
       image(weatherImage[2], width - height/4, height/6, height/8, height/8);
-    } else if (tw == "11d" || tw =="11n") {
+      weatherChecker = "rain";
+    } else if (tw == "11d" || tw =="11n") { // rain and thunder(thunderstorm)
       image(weatherImage[3], width - height/4, height/6, height/8, height/8);
-    } else if (tw == "50d" || tw == "50n") {
+      weatherChecker = "thunder";
+    } else if (tw == "50d" || tw == "50n") { // snow
       image(weatherImage[0], width - height/5, height/7, height/8, height/8);
-    } else {
+      weatherChecker = "snow";
+    } else { // other weather
       image(weatherImage[1], width - height/5, height/7, height/8, height/8);
+      weatherChecker = "sun";
     }
   }
 }

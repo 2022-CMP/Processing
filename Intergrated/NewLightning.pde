@@ -44,11 +44,11 @@ class NewLightning {
 
                 issplited = true;
                 if(random(1) > 0.5) {
-                    bothSplited = true;
+                    bothSplited = true; // two line will show (ex. -< )
                     s1 = new NewLightning(end, reculsionCount + 1, max);
                     s2 = new NewLightning(end, reculsionCount + 1, max);
                 }  else {
-                    bothSplited = false;
+                    bothSplited = false; // one line will show (ex. _/ )
                     s1 = new NewLightning(end, reculsionCount + 1, max);
                 }
             }

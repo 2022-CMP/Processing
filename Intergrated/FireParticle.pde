@@ -4,7 +4,7 @@ class FireParticle {
     PVector velocity;
     PVector acceleration;
 
-    float lifespan;
+    float lifespan; // each particle is controlled by life span( alpha, destroy)
 
     // for scale
     float FireHeight = height/10;

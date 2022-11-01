@@ -37,6 +37,8 @@ class FireParticleSystem {
         isRunning = false;
     }
 
+    int fireNumber = 2;
+
     // play all particles
     void run() {
         elapsedTime = millis();
@@ -51,7 +53,7 @@ class FireParticleSystem {
         }
 
         if (elapsedTime < endTime) {
-            for (int i = 0 ; i < 2 ; i++)
+            for (int i = 0 ; i < fireNumber ; i++)
                 addParticle();
         } else if (isRunning) {
             isRunning = false;

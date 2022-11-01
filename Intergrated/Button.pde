@@ -82,7 +82,9 @@ class Button {
       }
       // When CHOPSTICK Button Clicked
       if (str.equals("Chopstick")) {
-        chopstickAct = true;
+        String times = weatherAPI.timeChecker;
+        if (times == "08"||times == "09"||times == "12"||times == "13"||times == "18"||times == "19")
+          chopstickAct = true;
       }
     }
   }

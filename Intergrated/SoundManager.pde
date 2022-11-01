@@ -17,13 +17,13 @@ class SoundManager {
     // soundCollection.get("Song.mp3").loop(); // (Background Music)
   }
 
-  void SoundPlay (String soundName) {
+  void SoundPlay (String soundName) { // using effect sound
     soundCollection.get(soundName).play();
   }
-  void BackgroundMusic (String background) {
+  void BackgroundMusic (String background) { // for looping background music
     soundCollection.get(background).loop();
   }
-  void SoundAmp(String soundName, float soundAmp) {
+  void SoundAmp(String soundName, float soundAmp) { // if the sound which want to use is too loud or small using it.
     soundCollection.get(soundName).amp(soundAmp);
   }
 }
