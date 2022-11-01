@@ -7,7 +7,7 @@ void Punching(Block block) {
 
   punchTimeChecker +=0.1;
   if (punchTimeChecker < 1) {
-    if (block != null) {  //produce punching Image 
+    if (block != null) {
       pushMatrix();
       imageMode(CENTER);
       image(windowBreak, width/2, height/2, width, height);
@@ -16,7 +16,7 @@ void Punching(Block block) {
     }
   } 
   
-  if (!(block_.size <= 0)) { // punched block is flying away
+  if (!(block_.size <= 0)) {
     block.size -= block.size/30;
   }
   

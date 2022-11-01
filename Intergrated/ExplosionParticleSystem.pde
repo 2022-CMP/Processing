@@ -35,7 +35,7 @@ class ExplosionParticleSystem {
       isRunning = false;
 
       // signal
-      BlockRemove(); // if some times after, finish the effect
+      BlockRemove();
     }
 
     for (int i = particles.size()-1; i >= 0; i--) {

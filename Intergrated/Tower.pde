@@ -1,10 +1,9 @@
-class Tower { // for store stacking block
+class Tower {
   Stack<Block> Tower = new Stack<>();
 
   // DEFAULT Constructor
   Tower() {};
 
-<<<<<<< HEAD
   void drawTower() {
     if (!Tower.isEmpty()) {
       for (int i = 0; i < Tower.size(); i++) {
@@ -14,22 +13,13 @@ class Tower { // for store stacking block
         else {
           Tower.get(i).drawColorBlock();
         }
-=======
-  void drawTower() { // to show
-    for (int i = 0; i < Tower.size(); i++) {
-      if (Tower.get(i).isTextureMode) {
-        Tower.get(i).drawTextureBlock();
-      }
-      else {
-        Tower.get(i).drawColorBlock();
->>>>>>> 465b01a38452f75e966577270814d328d70a2559
       }
     }
     
     return;
   }
 
-  void pushBlock(Block block) { // add
+  void pushBlock(Block block) {
     if (Tower.isEmpty()) {
       Tower.push(block);
     }
@@ -41,7 +31,7 @@ class Tower { // for store stacking block
     return;
   }
 
-  Block popBlock() { //remove
+  Block popBlock() {
     return Tower.pop();
   }
 }

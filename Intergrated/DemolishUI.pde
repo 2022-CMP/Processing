@@ -1,4 +1,4 @@
-class DemolishUI { // Button which for using demolish the tower
+class DemolishUI {
   ArrayList<Button> buttonPanel = new ArrayList<>();
   float x, y;
   float startX;
@@ -45,6 +45,6 @@ class DemolishUI { // Button which for using demolish the tower
     
     x = startX;
 
-    rectMode(CORNER); // it doesn't work with push pop matrix so we need to return the normal face.
+    rectMode(CORNER);
   }
 }

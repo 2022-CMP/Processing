@@ -128,23 +128,6 @@ void draw () {
         credit.drawCredit();
     }
 
-    String tw = weatherAPI.tw;
-    if ( tw != null) {
-        if (weatherAPI.weatherChecker == "rain") { // rainy day, enforce the wind
-            windWeight = 10;
-        // image(weatherImage[2], width - height/4, height/6, height/8, height/8);
-        } else if (weatherAPI.weatherChecker == "thunder") { // thunder day , enforce the thunder
-            lightnings.lightningsNumber = 20; 
-        // image(weatherImage[3], width - height/4, height/6, height/8, height/8);
-        } else if (weatherAPI.weatherChecker == "snow"||weatherAPI.weatherChecker == "rain") {
-            fire.fireNumber = 1;// weak the fire if weather is snow and rain
-        // image(weatherImage[0], width - height/5, height/7, height/8, height/8);
-        } else {
-            fire.fireNumber = 3; // sunny day enforce the fire
-        // image(weatherImage[1], width - height/5, height/7, height/8, height/8);
-        }
-    }
-
     // Game Page
     if (currentPage == Page.GAME) {
         background(0xff, 0xff, 0xff);
@@ -191,6 +174,9 @@ void draw () {
             beforeWind(block);
         }
 
+        // 22.10.18 : Game Over
+        gameOver.run();
+
         // 22.10.19 : Change the Difficulty
         if (millis() - startTime > EachLevelPeriod)  {
             startTime += EachLevelPeriod;
@@ -206,10 +192,6 @@ void draw () {
         // 22.10.26 : time Checking
         //println(weatherAPI.timeChecker);
     }
-
-        // 22.10.18 : Game Over Checking and GameOver
-        gameOver.run();
-
 }
 
 
@@ -219,7 +201,6 @@ void BlockRemove () {
 
 
 // Initial version of integration
-// to using demolishing UI for demolishing function and class
 void mousePressed () {
     
     if (!tower.Tower.isEmpty()) {
@@ -292,7 +273,6 @@ void mousePressed () {
         }
     } */
 }
-<<<<<<< HEAD
 
 void keyPressed() {
     if (currentPage == Page.GAME_OVER) {
@@ -300,5 +280,3 @@ void keyPressed() {
         gameOver.IsGameOver = false;
     }
 }
-=======
->>>>>>> 465b01a38452f75e966577270814d328d70a2559

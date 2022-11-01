@@ -1,4 +1,4 @@
-class BackButton { // move to previous scene
+class BackButton {
   Button back;
 
   BackButton() {

@@ -1,7 +1,5 @@
 PImage balloon;
-float windWeight = 3;
-
-void beforeWind(Block block) { // if balloon function start balloon follow mouse curser
+void beforeWind(Block block) { // if balloon function start balloon follow mouse
   pushMatrix();
   imageMode(CENTER);
   
@@ -13,15 +11,15 @@ void beforeWind(Block block) { // if balloon function start balloon follow mouse
 
 void wind(Block block) { // balloon attached and fly away
   Block block_ = block;
-  block_.x += windWeight;
-  block_.y -= windWeight;
+  block_.x += 3;
+  block_.y -=3;
   block_.createBlock();
   soundManager.SoundPlay("Wind.wav");
-  pushMatrix();// Image attached at top of the demolished block
+  pushMatrix();
   imageMode(CENTER);
   image(balloon, block_.x, block_.y -block.blockHeight*2-10, block.size*block.blockHeight, block.size*block.blockHeight);
   popMatrix();
-  if (block_.y<0) { // if block is not in the monitor territory 
+  if (block_.y<0) {
     balloonAttached = false; // finish the function
     BlockRemove();
   }

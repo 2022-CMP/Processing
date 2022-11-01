@@ -1,7 +1,6 @@
-class NewLightnings { // for drawing many lightning when the lightning button clicked
+class NewLightnings {
     ArrayList<NewLightning> lightnings = new ArrayList<NewLightning>(); 
     boolean firstOccur = false;
-    int lightningsNumber = 7; // how many lightning will be shown ..
 
     // Check Running
     boolean isRunning = false;
@@ -9,7 +8,7 @@ class NewLightnings { // for drawing many lightning when the lightning button cl
     void Update () {
         if(firstOccur) {
             firstOccur = false;
-            for (int i = 0 ; i < lightningsNumber ; i++)
+            for (int i = 0 ; i < 7 ; i++)
                 lightnings.add(new NewLightning(new PVector(random(0, width), 0), 0, 7));
 
             isRunning = true;

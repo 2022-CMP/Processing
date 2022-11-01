@@ -29,7 +29,7 @@ class ExplosionParticle {
   }
 
   // Method to update position
-  void update() { //change position png's alpha go smaller so it will unshowned if lifespan<=0
+  void update() {
     velocity.add(acceleration);
     position.add(velocity);
     lifespan -= 1.0;
